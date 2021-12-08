@@ -6,6 +6,7 @@ import requests
 import json
 import numpy as np
 import pprint as pp
+from APIKEY import APIKEY
 
 def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDamage', key=None):
 
@@ -17,7 +18,10 @@ def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFlo
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [1] get current address by google api without GPS
-    # No code, just for now
+    ## url = 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + KEY
+    ## response = requests.get(url)
+    ## response.encoding = response.apparent_encoding
+    # This API returns [404]. The reason is not sure, but we can NOT use this API.
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -36,7 +40,7 @@ def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFlo
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [3] load all evacuation points of Hokkaido from .json data
     # THIS FILE IS NOT ON THE GitHUb BECAUSE OF LICENSE PROBLEMS.
-    with open('P20-12_01.json5', 'r') as f:
+    with open('P20-12_01.json', 'r') as f:
         points = json.load(f)
 
 
@@ -91,6 +95,6 @@ def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFlo
 if __name__ == '__main__':
     CA = 'JR Kushiro Station'
     HT = 'tsunamiHazard'
-    KEY = None
+    KEY = APIKEY
     # THIS KEY IS HIDDEN BECAUSE OF PROBLEMS ON SECURITY!
     find_all_evacuation_point(currentAddress=CA, hazardType=HT, key=KEY)
