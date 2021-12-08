@@ -6,15 +6,15 @@ import requests
 import json
 import numpy as np
 import pprint as pp
-from APIKEY import APIKEY
+
+try:
+    from APIKEY import APIKEY
+except ModuleNotFoundError:
+    print('ModuleNotFoundError')
+    print('The APIKEY.py does NOT exist on same directry.')
+    exit()
 
 def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDamage', key=None):
-
-    # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    # [0] check whether API key is not None
-    if key is None:
-        raise ValueError("THE API KEY IS None!")
-
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [1] get current address by google api without GPS
@@ -30,6 +30,10 @@ def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFlo
     url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + currentAddress + '&key=' + KEY
     response = requests.get(url)
     response.encoding = response.apparent_encoding
+    if response.status_code != 200:
+        print('ERROR : Requests process has NOT successfully finishied at process [2] (get current location)')
+        print('URL : {}'.format(url))
+        exit()
     data = response.json()
     ### pp.pprint(data)
     N, E = data['results'][0]['geometry']['location']['lat'], data['results'][0]['geometry']['location']['lng']
@@ -40,8 +44,13 @@ def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFlo
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [3] load all evacuation points of Hokkaido from .json data
     # THIS FILE IS NOT ON THE GitHUb BECAUSE OF LICENSE PROBLEMS.
-    with open('P20-12_01.json', 'r') as f:
-        points = json.load(f)
+    try:
+        with open('P20-12_01.json', 'r') as f:
+            points = json.load(f)
+    except FileNotFoundError:
+        print('ModuleNotFoundError')
+        print('The P20-12_01.json does NOT exist on same directry.')
+        exit()
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -78,6 +87,11 @@ def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFlo
 
         response = requests.get(url)
         response.encoding = response.apparent_encoding
+        if response.status_code != 200:
+            print('ERROR : Requests process has NOT successfully finishied at process [5] (get walking distance)')
+            print('URL : {}'.format(url))
+            exit()
+
         data = response.json()
         distMeter = data['routes'][0]['legs'][0]['distance']['value']
         distTime  = data['routes'][0]['legs'][0]['duration']['value']
