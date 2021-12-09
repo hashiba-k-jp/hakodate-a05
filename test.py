@@ -6,6 +6,7 @@ import requests
 import json
 import numpy as np
 import pprint as pp
+import sys
 
 try:
     from APIKEY import APIKEY
@@ -14,7 +15,7 @@ except ModuleNotFoundError:
     print('The APIKEY.py does NOT exist on same directry.')
     exit()
 
-def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDamage', key=None):
+def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDamage', key=None, isTest=True):
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [1] get current address by google api without GPS
@@ -25,20 +26,30 @@ def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFlo
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    # [2] get latitude(N) and longitude(E) of current address
+    # [2.A] get latitude(N) and longitude(E) of current address
     # -> Everyone can NOT run this program without this API key.
-    url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + currentAddress + '&key=' + KEY
-    response = requests.get(url)
-    response.encoding = response.apparent_encoding
-    if response.status_code != 200:
-        print('ERROR : Requests process has NOT successfully finishied at process [2] (get current location)')
-        print('URL : {}'.format(url))
-        exit()
-    data = response.json()
-    ### pp.pprint(data)
-    N, E = data['results'][0]['geometry']['location']['lat'], data['results'][0]['geometry']['location']['lng']
-    # N <class 'float'> := latitude of current location (North)
-    # E <class 'float'> := longitude of current location (East)
+    if isTest:
+        url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + currentAddress + '&key=' + KEY
+        response = requests.get(url)
+        response.encoding = response.apparent_encoding
+        if response.status_code != 200:
+            print('ERROR : Requests process has NOT successfully finishied at process [2.A] (get current location)')
+            print('URL : {}'.format(url))
+            exit()
+        data = response.json()
+        ### pp.pprint(data)
+        N = data['results'][0]['geometry']['location']['lat']
+        E = data['results'][0]['geometry']['location']['lng']
+        # N <class 'float'> := latitude of current location (North)
+        # E <class 'float'> := longitude of current location (East)
+
+
+    # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    # [2.B] get latitude(N) and longitude(E) of current address FROM JavaScript
+    else:
+        recieve = sys.stdin.readline()
+        N = recieve['N']
+        E = recieve['E']
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
