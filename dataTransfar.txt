@@ -1,0 +1,20 @@
+JMA -> Server
+- Warnings
+
+
+
+Server -> User
++ User ID (HASH)
++ Type of Warnings
+
+
+
+User -> Server
++ GPS
++ User ID (HASH)
++ Type of Warnings
+
+
+
+Server -> User
++ Route
