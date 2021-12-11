@@ -12,13 +12,13 @@ import pprint as pp
 import sys
 
 try:
-    from APIKEY import APIKEY
+    from data.APIKEY import APIKEY
 except ModuleNotFoundError:
     print('ModuleNotFoundError')
     print('The APIKEY.py does NOT exist on same directry.')
     exit()
 
-def find_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDamage', key=None, isTest=True):
+def find_evacuation_point(currentAddress="札幌駅", hazardType='20', key=None, isTest=True):
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [1] get current address by google api without GPS
@@ -56,22 +56,34 @@ def find_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDa
     # [3] load all evacuation points of Hokkaido from .json data
     # THIS FILE IS NOT ON THE GitHUb BECAUSE OF LICENSE PROBLEMS.
     try:
-        with open('P20-12_01.json', 'r') as f:
+        with open('data/mergeFromCity.json', 'r') as f:
             points = json.load(f)
     except FileNotFoundError:
         print('ModuleNotFoundError')
-        print('The P20-12_01.json does NOT exist on same directry.')
+        print('The data/mergeFromCity.json does NOT exist on same directry.')
         exit()
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [4] find some evacuation points which can be used for specified disasters and near the current location.
     distlist = []
-    # hazardType <class 'str'> := type of hazard (disaster) and can be below 6 values
-    # -> 'earthquakeHazard', 'notSpecified', 'other', 'tsunamiHazard', 'volcanicHazard', 'windAndFloodDamage'
+    hazardTypeName = {
+        '03': 'windAndFloodDamage',
+        '04': 'windAndFloodDamage',
+        '05': 'windAndFloodDamage',
+        '33': 'windAndFloodDamage',
+        '35': 'windAndFloodDamage',
+        '08': 'highTideHazard',
+        '38': 'highTideHazard',
+        '50': 'earthquakeHazard',
+        '60': 'volcanicHazard',
+        '70': 'landslideDisaster',
+
+        '20': 'windAndFloodDamage',
+    }
     for key, value in zip(points.keys(), points.values()):
-        if (value['hazardTypes']['notSpecified'] == True) or (value['hazardTypes']['windAndFloodDamage']):
-            eucD = np.sqrt((value['geopoint']['North'] - N)**2 + (value['geopoint']['East'] - E)**2) / 0.0090133729745762
+        if (value['hazardTypes'][hazardTypeName[hazardType]]):
+            eucD = np.sqrt((float(value['geopoint']['North']) - N)**2 + (float(value['geopoint']['East']) - E)**2) / 0.0090133729745762
             # EUClidean Distance
             distlist.append([key, eucD, value['name']])
     distlist.sort(key = lambda x: x[1])
@@ -85,6 +97,7 @@ def find_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDa
     else:
         possibleList = [x for x in distlist if x[1] < ELD]
     # possibleList <class 'list'> := some evacuation points which satisfy [4]
+    pp.pprint(possibleList)
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -110,7 +123,7 @@ def find_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDa
         point.append(distTime)
 
     print('current address is {}'.format(currentAddress))
-    print('tareget hazard is {}'.format(hazardType))
+    print('tareget hazard is {}'.format(hazardTypeName[hazardType]))
     print('id, name, Euclidean_Dist(km), distance(m), walking time(sec)')
     possibleList.sort(key = lambda x: x[4])
     pp.pprint(possibleList)
@@ -118,8 +131,8 @@ def find_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDa
 
 # This is for the TEST run
 if __name__ == '__main__':
-    CA = 'JR Kushiro Station'
-    HT = 'tsunamiHazard'
+    CA = '函館中央郵便局'
+    HT = '70'
     KEY = APIKEY
     # THIS KEY IS HIDDEN BECAUSE OF PROBLEMS ON SECURITY!
     find_evacuation_point(currentAddress=CA, hazardType=HT, key=KEY)
