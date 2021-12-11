@@ -2,7 +2,7 @@ from http.server import HTTPServer
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
-
+import pprint as pp
 
 class RequestHandler(BaseHTTPRequestHandler):
 
@@ -21,12 +21,18 @@ class RequestHandler(BaseHTTPRequestHandler):
         params = parse_qs(parsed.query)
         content_len  = int(self.headers.get("content-length"))
         req_body = self.rfile.read(content_len).decode("utf-8")
-        body  = "method: " + str(self.command) + "\n"
-        body += "params: " + str(params) + "\n"
-        body += "body  : " + req_body + "\n"
-        print(req_body)
-        print(type(req_body))
-        # run any programs here ?
+        # body  = "method: " + str(self.command) + "\n"
+        # body += "params: " + str(params) + "\n"
+        # body += "body  : " + req_body + "\n"
+        paramsList = req_body.split('&')
+        params = {}
+        for param in paramsList:
+            [key, value] = param.split('=')
+            params[key] = value
+        pp.pprint(params)
+
+        # -=-=-=-=-=-=-=-= TEST
+        # Run all program here ?
 
     def do_GET(self):
         self.send_response(200)
