@@ -29,6 +29,9 @@ def csvToJson():
     '''
     list = {}
     for row in table[2:]:
+        if (row[15] == '') or (row[14] == ''):
+            print(row[0]+'-'+row[2])
+            continue
         list[row[0]+'-'+row[2]] = {
             'address': row[4],
             'geopoint': {

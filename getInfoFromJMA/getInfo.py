@@ -136,6 +136,25 @@ class Entry:
         self.time = time
         self.data = []
 
+        # USE  03 大雨警報
+        # USE  04 洪水警報
+        # USE  05 暴風警報
+        # USE  08 高潮警報
+        # TEST 20 濃霧注意報
+        # USE  33 大雨特別警報
+        # USE  35 暴風特別警報
+        # USE  38 高潮特別警報
+        # USE  50 地震 (勝手に定義した番号であって気象庁公式のものではないことに留意)
+        '''
+        "windAndFloodDamage" 03, 04, 05, 33, 35, 20(TEST)
+        "earthquakeHazard"   50
+        "tsunamiHazard"      None
+        "volcanicHazard"     None
+        "highTideHazard"     08, 38
+        "landslideDisaster"  None
+        '''
+
+
     def details(self):
         if self.type == 'Warning':
             res = requests.get(self.url)
@@ -148,15 +167,7 @@ class Entry:
             self.wCodes = [i.select_one('Kind > Code').text for i in items]
             self.cCodes = [i.select_one('Area > Code').text for i in items]
             for wCode, cCode in zip(self.wCodes, self.cCodes):
-                #      02 暴風雪警報
-                # USE  03 大雨警報
-                # USE  04 洪水警報
-                #      05 暴風警報
-                # TEST 20 濃霧注意報
-                #      32 暴風雪特別警報
-                # USE  33 大雨特別警報
-                #      35 暴風特別警報
-                if wCode in ['02', '03', '04', '05', '20', '32', '33', '35']:
+                if wCode in ['03', '04', '05', '08', '20', '33', '35', '38']:
                     self.data.append({
                         'cityCode': cCode,
                         'warningCode': wCode
@@ -171,7 +182,6 @@ class Entry:
                 int = [i.text for i in Bs4.select('Body > Intensity > Observation > Pref > Area > City > MaxInt')]
                 data = []
                 for code, int in zip(code, int):
-                    # 40 地震 (勝手に定義した番号であって気象庁公式のものではないことに留意)
                     if int in ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7']:
                         self.data.append({
                             'cityCode': code,
