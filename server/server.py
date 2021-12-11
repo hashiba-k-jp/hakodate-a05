@@ -21,6 +21,8 @@ class class1(BaseHTTPRequestHandler):
         body += "params: " + str(params) + "\n"
         body += "body  : " + req_body + "\n"
         print(req_body)
+        print(type(req_body))
+        # run any programs here ?
 
 
     def do_GET(self):
