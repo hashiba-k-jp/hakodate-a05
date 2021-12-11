@@ -89,7 +89,6 @@ def getInfo():
         print('No Update!')
         exit()
 
-    pp.pprint(infoSet)
     entries = [
         Entry(
             type = i['type'],
@@ -101,9 +100,21 @@ def getInfo():
     ]
 
     notificationTagets = []
+    data = []
     for entry in entries:
         entry.details()
-        pp.pprint(entry.data)
+        data += entry.data
+
+    if isTest:
+        data.append({
+            'cityCode': '0120200',
+            'warningCode': '03',
+        })
+
+    if isTest:
+        pp.pprint(data)
+        with open('disasterList.json', 'w') as f:
+            json.dump(data, f, ensure_ascii=True)
 
     # record the last information
     lastInfoOut = {
@@ -145,8 +156,8 @@ class Entry:
                 # 35 暴風特別警報
                 if wCode in ['02', '03', '04', '05', '20', '32', '33', '35']:
                     self.data.append({
-                        'warningCode': wCode,
-                        'cityCode': cCode
+                        'cityCode': cCode,
+                        'warningCode': wCode
                     })
         elif self.type == 'Earthquake':
             res = requests.get(self.url)
@@ -158,10 +169,11 @@ class Entry:
                 int = [i.text for i in Bs4.select('Body > Intensity > Observation > Pref > Area > City > MaxInt')]
                 data = []
                 for code, int in zip(code, int):
+                    # 40 地震 (勝手に定義した番号であって気象庁公式のものではないことに留意)
                     if int in ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7']:
                         self.data.append({
                             'cityCode': code,
-                            'intensity': 'Earthquake:{}'.format(int)
+                            'warningCode': '50'
                         })
             elif 0:
                 # volcanicHazard
