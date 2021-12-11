@@ -2,7 +2,10 @@ function load() {
   alert("ページが読み込まれました！");
   var param = location.search;
   alert(param);
-  alert(getParam('key'))
+  userID = getParam('userID');
+  if(userID == null){alert('userID is null!');}
+  warningCode = getParam('warningCode');
+  if(warningCode == null){alert('warningCode is null!');}
 }
 window.onload = load;
 
