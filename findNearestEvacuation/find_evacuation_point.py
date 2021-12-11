@@ -15,7 +15,7 @@ except ModuleNotFoundError:
     print('The APIKEY.py does NOT exist on same directry.')
     exit()
 
-def find_all_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDamage', key=None, isTest=True):
+def find_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDamage', key=None, isTest=True):
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [1] get current address by google api without GPS
@@ -122,4 +122,4 @@ if __name__ == '__main__':
     HT = 'tsunamiHazard'
     KEY = APIKEY
     # THIS KEY IS HIDDEN BECAUSE OF PROBLEMS ON SECURITY!
-    find_all_evacuation_point(currentAddress=CA, hazardType=HT, key=KEY)
+    find_evacuation_point(currentAddress=CA, hazardType=HT, key=KEY)
