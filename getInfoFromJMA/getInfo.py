@@ -20,16 +20,16 @@ def getInfo():
             lastInfo  = json.load(f)
     except FileNotFoundError:
         lastInfo = {
-            'weather': '',
-            'earthquake': ''
+            'Warning': '',
+            'Earthquake': ''
         }
 
     # THIS CODE IS JUST FOR TEST !!!
     isTest = True
     if isTest:
         lastInfo = {
-            'weather': '',
-            'earthquake': ''
+            'Warning': '',
+            'Earthquake': ''
         }
 
     # weather Warning
@@ -70,7 +70,7 @@ def getInfo():
     infoSet = []
     # only weather warning, just for now
     for info in infoSetW:
-        if info['url'] == lastInfo['weather']:
+        if info['url'] == lastInfo['Warning']:
             break
         else:
             noUpdate = False
@@ -78,11 +78,11 @@ def getInfo():
                 infoSet.append(info)
     # no process (earthquake)
     for info in infoSetE:
-        if info['url'] == lastInfo['earthquake']:
+        if info['url'] == lastInfo['Earthquake']:
             break
         else:
             noUpdate = False
-            if info['title'] in ['']:
+            if info['title'] in ['震源・震度に関する情報']:
                 infoSet.append(info)
 
     if noUpdate:
@@ -107,8 +107,8 @@ def getInfo():
 
     # record the last information
     lastInfoOut = {
-        'weather': infoSetW[0]['url'],
-        'earthquake': infoSetE[0]['url']
+        'Warning': infoSetW[0]['url'],
+        'Earthquake': infoSetE[0]['url']
     }
     with open('lastInfo.json', 'w') as f:
         json.dump(lastInfoOut, f, ensure_ascii=True)
@@ -149,16 +149,23 @@ class Entry:
                         'cityCode': cCode
                     })
         elif self.type == 'Earthquake':
-            pass
-
             res = requests.get(self.url)
             res.encoding = res.apparent_encoding
             Bs4 = bs(res.text, 'lxml-xml')
-
-            # Earthquake (level: 3≤ )
-            if self.title == '震度速報':
+            # Earthquake (Intensity: 1≤ )
+            if self.title == '震源・震度に関する情報':
+                code = [i.text for i in Bs4.select('Body > Intensity > Observation > Pref > Area > City > Code')]
+                int = [i.text for i in Bs4.select('Body > Intensity > Observation > Pref > Area > City > MaxInt')]
+                data = []
+                for code, int in zip(code, int):
+                    if int in ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7']:
+                        self.data.append({
+                            'cityCode': code,
+                            'intensity': 'Earthquake:{}'.format(int)
+                        })
+            elif 0:
+                # volcanicHazard
                 pass
-
 
 
 

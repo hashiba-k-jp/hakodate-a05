@@ -1,1 +1,1 @@
-{"weather": "http://www.data.jma.go.jp/developer/xml/data/20211210133936_0_VPWW53_040000.xml", "earthquake": "http://www.data.jma.go.jp/developer/xml/data/20211210111940_0_VXSE53_270000.xml"}
+{"Warning": "http://www.data.jma.go.jp/developer/xml/data/20211211014807_0_VPWW53_014100.xml", "Earthquake": "http://www.data.jma.go.jp/developer/xml/data/20211211012839_0_VXSE53_270000.xml"}
