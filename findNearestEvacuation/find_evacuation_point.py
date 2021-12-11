@@ -18,7 +18,7 @@ except ModuleNotFoundError:
     print('The APIKEY.py does NOT exist on same directry.')
     exit()
 
-def find_evacuation_point(currentAddress="札幌駅", hazardType='20', key=None, isTest=True):
+def find_evacuation_point(currentAddress="東京駅", hazardType='03', key=None, isTest=True, GPS=None, userID=None):
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [1] get current address by google api without GPS
@@ -47,9 +47,12 @@ def find_evacuation_point(currentAddress="札幌駅", hazardType='20', key=None,
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [2.B] get latitude(N) and longitude(E) of current address FROM JavaScript
     else:
-        recieve = sys.stdin.readline()
-        N = recieve['N']
-        E = recieve['E']
+        if GPS is None:
+            print('ERROR : GPS is None')
+            exit()
+        else:
+            N = GPS['N']
+            E = GPS['E']
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -97,7 +100,7 @@ def find_evacuation_point(currentAddress="札幌駅", hazardType='20', key=None,
     else:
         possibleList = [x for x in distlist if x[1] < ELD]
     # possibleList <class 'list'> := some evacuation points which satisfy [4]
-    pp.pprint(possibleList)
+    ### pp.pprint(possibleList)
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -128,11 +131,19 @@ def find_evacuation_point(currentAddress="札幌駅", hazardType='20', key=None,
     possibleList.sort(key = lambda x: x[4])
     pp.pprint(possibleList)
 
+    url = 'https://www.google.com/maps/dir/' + str(N) + ',+' + str(E) +\
+          '/' + points[possibleList[0][0]]['geopoint']['North'] + ',+' + points[possibleList[0][0]]['geopoint']['East'] + '/'
+    print('-='*25)
+    pp.pprint({
+        'userID': userID,
+        'url': url
+    })
+
 
 # This is for the TEST run
 if __name__ == '__main__':
-    CA = '函館中央郵便局'
-    HT = '70'
+    CA = '函館高専'
+    HT = '03'
     KEY = APIKEY
     # THIS KEY IS HIDDEN BECAUSE OF PROBLEMS ON SECURITY!
     find_evacuation_point(currentAddress=CA, hazardType=HT, key=KEY)
