@@ -4,7 +4,11 @@ from urllib.parse import urlparse
 from urllib.parse import parse_qs
 
 
-class class1(BaseHTTPRequestHandler):
+class RequestHandler(BaseHTTPRequestHandler):
+
+    def end_headers (self):
+        self.send_header('Access-Control-Allow-Origin', '*')
+        BaseHTTPRequestHandler.end_headers(self)
 
     def do_POST(self):
         self.send_response(200)
@@ -24,7 +28,6 @@ class class1(BaseHTTPRequestHandler):
         print(type(req_body))
         # run any programs here ?
 
-
     def do_GET(self):
         self.send_response(200)
         self.send_header("User-Agent","test1")
@@ -35,5 +38,5 @@ class class1(BaseHTTPRequestHandler):
 
 ip = 'localhost'
 port = 8000
-server = HTTPServer((ip, port), class1)
+server = HTTPServer((ip, port), RequestHandler)
 server.serve_forever()
