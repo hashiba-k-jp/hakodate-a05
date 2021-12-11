@@ -157,7 +157,7 @@ class Entry:
 
             # Earthquake (level: 3≤ )
             if self.title == '震度速報':
-                
+                pass
 
 
 
