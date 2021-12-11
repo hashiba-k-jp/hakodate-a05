@@ -148,14 +148,14 @@ class Entry:
             self.wCodes = [i.select_one('Kind > Code').text for i in items]
             self.cCodes = [i.select_one('Area > Code').text for i in items]
             for wCode, cCode in zip(self.wCodes, self.cCodes):
-                # 02 暴風雪警報
-                # 03 大雨警報
-                # 04 洪水警報
-                # 05 暴風警報
-                # 20 濃霧注意報 (TEST USE ONLY)
-                # 32 暴風雪特別警報
-                # 33 大雨特別警報
-                # 35 暴風特別警報
+                #      02 暴風雪警報
+                # USE  03 大雨警報
+                # USE  04 洪水警報
+                #      05 暴風警報
+                # TEST 20 濃霧注意報
+                #      32 暴風雪特別警報
+                # USE  33 大雨特別警報
+                #      35 暴風特別警報
                 if wCode in ['02', '03', '04', '05', '20', '32', '33', '35']:
                     self.data.append({
                         'cityCode': cCode,
