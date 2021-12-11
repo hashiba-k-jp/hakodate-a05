@@ -1,1 +1,4 @@
-{"Warning": "http://www.data.jma.go.jp/developer/xml/data/20211211015513_0_VPWW53_014030.xml", "Earthquake": "http://www.data.jma.go.jp/developer/xml/data/20211211020030_0_VFVO53_010000.xml"}
+{
+    "Earthquake": "http://www.data.jma.go.jp/developer/xml/data/20211211020030_0_VFVO53_010000.xml",
+    "Warning": "http://www.data.jma.go.jp/developer/xml/data/20211211033124_0_VPWW53_160000.xml"
+}

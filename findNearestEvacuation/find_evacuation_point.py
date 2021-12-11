@@ -1,5 +1,8 @@
 # ==================================================
 # Hack U KOSEN
+# このプログラムは
+#   （著作権表示）
+# を加工したデータを用いている。
 # ==================================================
 
 import requests
@@ -19,11 +22,8 @@ def find_evacuation_point(currentAddress="札幌駅", hazardType='windAndFloodDa
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [1] get current address by google api without GPS
-    ## url = 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + KEY
-    ## response = requests.get(url)
-    ## response.encoding = response.apparent_encoding
-    # This API returns [404]. The reason is not sure, but we can NOT use this API.
-
+    # ---NO CODE---
+    # get location data FROM GPS, NOT GOOGLE API
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [2.A] get latitude(N) and longitude(E) of current address

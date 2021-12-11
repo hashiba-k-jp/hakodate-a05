@@ -9,6 +9,7 @@ import pprint as pp
 import json
 
 def getInfo():
+    isTest = True
     # this function dose ...
     # ~ get information from JAM server
     # ~ create list of tareget city codes with code of warning type
@@ -24,8 +25,9 @@ def getInfo():
             'Earthquake': ''
         }
 
+    pp.pprint(lastInfo)
+
     # THIS CODE IS JUST FOR TEST !!!
-    isTest = True
     if isTest:
         lastInfo = {
             'Warning': '',
@@ -114,15 +116,15 @@ def getInfo():
     if isTest:
         pp.pprint(data)
         with open('disasterList.json', 'w') as f:
-            json.dump(data, f, ensure_ascii=True)
+            json.dump(data, f, ensure_ascii=True, indent=4, sort_keys=True, separators=(',', ': '))
 
     # record the last information
     lastInfoOut = {
         'Warning': infoSetW[0]['url'],
         'Earthquake': infoSetE[0]['url']
     }
-    with open('lastInfo.json', 'w') as f:
-        json.dump(lastInfoOut, f, ensure_ascii=True)
+    with open('lastInfo.json', 'w', encoding='UTF-8') as f:
+        json.dump(lastInfoOut, f, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
 
 
 class Entry:

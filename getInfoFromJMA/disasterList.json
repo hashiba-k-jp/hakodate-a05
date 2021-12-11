@@ -1,1 +1,1682 @@
-[{"cityCode": "2020201", "warningCode": "20"}, {"cityCode": "2021501", "warningCode": "20"}, {"cityCode": "2022000", "warningCode": "20"}, {"cityCode": "2044600", "warningCode": "20"}, {"cityCode": "2044800", "warningCode": "20"}, {"cityCode": "2045000", "warningCode": "20"}, {"cityCode": "2045100", "warningCode": "20"}, {"cityCode": "2045200", "warningCode": "20"}, {"cityCode": "4520200", "warningCode": "20"}, {"cityCode": "4520500", "warningCode": "20"}, {"cityCode": "4520900", "warningCode": "20"}, {"cityCode": "4534100", "warningCode": "20"}, {"cityCode": "4536100", "warningCode": "20"}, {"cityCode": "4620600", "warningCode": "20"}, {"cityCode": "4620800", "warningCode": "20"}, {"cityCode": "4621501", "warningCode": "20"}, {"cityCode": "4621800", "warningCode": "20"}, {"cityCode": "4622400", "warningCode": "20"}, {"cityCode": "4622500", "warningCode": "20"}, {"cityCode": "4639200", "warningCode": "20"}, {"cityCode": "4640400", "warningCode": "20"}, {"cityCode": "4645200", "warningCode": "20"}, {"cityCode": "1020100", "warningCode": "20"}, {"cityCode": "1020200", "warningCode": "20"}, {"cityCode": "1020300", "warningCode": "20"}, {"cityCode": "1020400", "warningCode": "20"}, {"cityCode": "1020500", "warningCode": "20"}, {"cityCode": "1020700", "warningCode": "20"}, {"cityCode": "1020800", "warningCode": "20"}, {"cityCode": "1020900", "warningCode": "20"}, {"cityCode": "1021000", "warningCode": "20"}, {"cityCode": "1021100", "warningCode": "20"}, {"cityCode": "1021200", "warningCode": "20"}, {"cityCode": "1034400", "warningCode": "20"}, {"cityCode": "1034500", "warningCode": "20"}, {"cityCode": "1036600", "warningCode": "20"}, {"cityCode": "1036700", "warningCode": "20"}, {"cityCode": "1038200", "warningCode": "20"}, {"cityCode": "1038300", "warningCode": "20"}, {"cityCode": "1038400", "warningCode": "20"}, {"cityCode": "1046400", "warningCode": "20"}, {"cityCode": "1052100", "warningCode": "20"}, {"cityCode": "1052200", "warningCode": "20"}, {"cityCode": "1052300", "warningCode": "20"}, {"cityCode": "1052400", "warningCode": "20"}, {"cityCode": "1052500", "warningCode": "20"}, {"cityCode": "0920100", "warningCode": "20"}, {"cityCode": "0920200", "warningCode": "20"}, {"cityCode": "0920300", "warningCode": "20"}, {"cityCode": "0920400", "warningCode": "20"}, {"cityCode": "0920500", "warningCode": "20"}, {"cityCode": "0920800", "warningCode": "20"}, {"cityCode": "0920900", "warningCode": "20"}, {"cityCode": "0921400", "warningCode": "20"}, {"cityCode": "0921500", "warningCode": "20"}, {"cityCode": "0921600", "warningCode": "20"}, {"cityCode": "0930100", "warningCode": "20"}, {"cityCode": "0934200", "warningCode": "20"}, {"cityCode": "0934300", "warningCode": "20"}, {"cityCode": "0934400", "warningCode": "20"}, {"cityCode": "0934500", "warningCode": "20"}, {"cityCode": "0936100", "warningCode": "20"}, {"cityCode": "0936400", "warningCode": "20"}, {"cityCode": "0938600", "warningCode": "20"}, {"cityCode": "0941100", "warningCode": "20"}, {"cityCode": "0720100", "warningCode": "20"}, {"cityCode": "0720200", "warningCode": "20"}, {"cityCode": "0720301", "warningCode": "20"}, {"cityCode": "0720302", "warningCode": "20"}, {"cityCode": "0720500", "warningCode": "20"}, {"cityCode": "0720700", "warningCode": "20"}, {"cityCode": "0720800", "warningCode": "20"}, {"cityCode": "0721000", "warningCode": "20"}, {"cityCode": "0721100", "warningCode": "20"}, {"cityCode": "0721300", "warningCode": "20"}, {"cityCode": "0721400", "warningCode": "20"}, {"cityCode": "0730100", "warningCode": "20"}, {"cityCode": "0730300", "warningCode": "20"}, {"cityCode": "0730800", "warningCode": "20"}, {"cityCode": "0732200", "warningCode": "20"}, {"cityCode": "0734200", "warningCode": "20"}, {"cityCode": "0734401", "warningCode": "20"}, {"cityCode": "0734402", "warningCode": "20"}, {"cityCode": "0736200", "warningCode": "20"}, {"cityCode": "0736400", "warningCode": "20"}, {"cityCode": "0736700", "warningCode": "20"}, {"cityCode": "0736800", "warningCode": "20"}, {"cityCode": "0740200", "warningCode": "20"}, {"cityCode": "0740500", "warningCode": "20"}, {"cityCode": "0740700", "warningCode": "20"}, {"cityCode": "0740800", "warningCode": "20"}, {"cityCode": "0742100", "warningCode": "20"}, {"cityCode": "0742200", "warningCode": "20"}, {"cityCode": "0742300", "warningCode": "20"}, {"cityCode": "0744400", "warningCode": "20"}, {"cityCode": "0744500", "warningCode": "20"}, {"cityCode": "0744600", "warningCode": "20"}, {"cityCode": "0744700", "warningCode": "20"}, {"cityCode": "0746100", "warningCode": "20"}, {"cityCode": "0746400", "warningCode": "20"}, {"cityCode": "0746500", "warningCode": "20"}, {"cityCode": "0746600", "warningCode": "20"}, {"cityCode": "0748100", "warningCode": "20"}, {"cityCode": "0748200", "warningCode": "20"}, {"cityCode": "0748300", "warningCode": "20"}, {"cityCode": "0748400", "warningCode": "20"}, {"cityCode": "0750100", "warningCode": "20"}, {"cityCode": "0750200", "warningCode": "20"}, {"cityCode": "0750300", "warningCode": "20"}, {"cityCode": "0750400", "warningCode": "20"}, {"cityCode": "0750500", "warningCode": "20"}, {"cityCode": "0752100", "warningCode": "20"}, {"cityCode": "0752200", "warningCode": "20"}, {"cityCode": "0754400", "warningCode": "20"}, {"cityCode": "0754800", "warningCode": "20"}, {"cityCode": "0756400", "warningCode": "20"}, {"cityCode": "0320100", "warningCode": "20"}, {"cityCode": "0320500", "warningCode": "20"}, {"cityCode": "0320600", "warningCode": "20"}, {"cityCode": "0320800", "warningCode": "20"}, {"cityCode": "0320900", "warningCode": "20"}, {"cityCode": "0321300", "warningCode": "20"}, {"cityCode": "0321400", "warningCode": "20"}, {"cityCode": "0321500", "warningCode": "20"}, {"cityCode": "0321600", "warningCode": "20"}, {"cityCode": "0330100", "warningCode": "20"}, {"cityCode": "0330200", "warningCode": "20"}, {"cityCode": "0330300", "warningCode": "20"}, {"cityCode": "0332100", "warningCode": "20"}, {"cityCode": "0332200", "warningCode": "20"}, {"cityCode": "0336600", "warningCode": "20"}, {"cityCode": "0338100", "warningCode": "20"}, {"cityCode": "0340200", "warningCode": "20"}, {"cityCode": "0344100", "warningCode": "20"}, {"cityCode": "0350100", "warningCode": "20"}, {"cityCode": "0350600", "warningCode": "20"}, {"cityCode": "0352400", "warningCode": "20"}, {"cityCode": "1210000", "warningCode": "20"}, {"cityCode": "1220300", "warningCode": "20"}, {"cityCode": "1220400", "warningCode": "20"}, {"cityCode": "1220600", "warningCode": "20"}, {"cityCode": "1220700", "warningCode": "20"}, {"cityCode": "1220800", "warningCode": "20"}, {"cityCode": "1221000", "warningCode": "20"}, {"cityCode": "1221100", "warningCode": "20"}, {"cityCode": "1221200", "warningCode": "20"}, {"cityCode": "1221300", "warningCode": "20"}, {"cityCode": "1221600", "warningCode": "20"}, {"cityCode": "1221700", "warningCode": "20"}, {"cityCode": "1221900", "warningCode": "20"}, {"cityCode": "1222000", "warningCode": "20"}, {"cityCode": "1222100", "warningCode": "20"}, {"cityCode": "1222200", "warningCode": "20"}, {"cityCode": "1222400", "warningCode": "20"}, {"cityCode": "1222500", "warningCode": "20"}, {"cityCode": "1222600", "warningCode": "20"}, {"cityCode": "1222700", "warningCode": "20"}, {"cityCode": "1222800", "warningCode": "20"}, {"cityCode": "1222900", "warningCode": "20"}, {"cityCode": "1223000", "warningCode": "20"}, {"cityCode": "1223100", "warningCode": "20"}, {"cityCode": "1223200", "warningCode": "20"}, {"cityCode": "1223300", "warningCode": "20"}, {"cityCode": "1223600", "warningCode": "20"}, {"cityCode": "1232200", "warningCode": "20"}, {"cityCode": "1232900", "warningCode": "20"}, {"cityCode": "1234200", "warningCode": "20"}, {"cityCode": "1234700", "warningCode": "20"}, {"cityCode": "1234900", "warningCode": "20"}, {"cityCode": "1240900", "warningCode": "20"}, {"cityCode": "1242200", "warningCode": "20"}, {"cityCode": "1242600", "warningCode": "20"}, {"cityCode": "1242700", "warningCode": "20"}, {"cityCode": "1244100", "warningCode": "20"}, {"cityCode": "1110000", "warningCode": "20"}, {"cityCode": "1120100", "warningCode": "20"}, {"cityCode": "1120200", "warningCode": "20"}, {"cityCode": "1120300", "warningCode": "20"}, {"cityCode": "1120600", "warningCode": "20"}, {"cityCode": "1120700", "warningCode": "20"}, {"cityCode": "1120800", "warningCode": "20"}, {"cityCode": "1120900", "warningCode": "20"}, {"cityCode": "1121000", "warningCode": "20"}, {"cityCode": "1121100", "warningCode": "20"}, {"cityCode": "1121200", "warningCode": "20"}, {"cityCode": "1121400", "warningCode": "20"}, {"cityCode": "1121500", "warningCode": "20"}, {"cityCode": "1121600", "warningCode": "20"}, {"cityCode": "1121700", "warningCode": "20"}, {"cityCode": "1121800", "warningCode": "20"}, {"cityCode": "1121900", "warningCode": "20"}, {"cityCode": "1122100", "warningCode": "20"}, {"cityCode": "1122200", "warningCode": "20"}, {"cityCode": "1122300", "warningCode": "20"}, {"cityCode": "1122400", "warningCode": "20"}, {"cityCode": "1122500", "warningCode": "20"}, {"cityCode": "1122700", "warningCode": "20"}, {"cityCode": "1122800", "warningCode": "20"}, {"cityCode": "1122900", "warningCode": "20"}, {"cityCode": "1123000", "warningCode": "20"}, {"cityCode": "1123100", "warningCode": "20"}, {"cityCode": "1123200", "warningCode": "20"}, {"cityCode": "1123300", "warningCode": "20"}, {"cityCode": "1123400", "warningCode": "20"}, {"cityCode": "1123500", "warningCode": "20"}, {"cityCode": "1123700", "warningCode": "20"}, {"cityCode": "1123800", "warningCode": "20"}, {"cityCode": "1123900", "warningCode": "20"}, {"cityCode": "1124000", "warningCode": "20"}, {"cityCode": "1124100", "warningCode": "20"}, {"cityCode": "1124200", "warningCode": "20"}, {"cityCode": "1124300", "warningCode": "20"}, {"cityCode": "1124500", "warningCode": "20"}, {"cityCode": "1124600", "warningCode": "20"}, {"cityCode": "1130100", "warningCode": "20"}, {"cityCode": "1132400", "warningCode": "20"}, {"cityCode": "1132600", "warningCode": "20"}, {"cityCode": "1132700", "warningCode": "20"}, {"cityCode": "1134100", "warningCode": "20"}, {"cityCode": "1134200", "warningCode": "20"}, {"cityCode": "1134300", "warningCode": "20"}, {"cityCode": "1134600", "warningCode": "20"}, {"cityCode": "1134700", "warningCode": "20"}, {"cityCode": "1134800", "warningCode": "20"}, {"cityCode": "1134900", "warningCode": "20"}, {"cityCode": "1136100", "warningCode": "20"}, {"cityCode": "1136200", "warningCode": "20"}, {"cityCode": "1136300", "warningCode": "20"}, {"cityCode": "1136500", "warningCode": "20"}, {"cityCode": "1136900", "warningCode": "20"}, {"cityCode": "1138100", "warningCode": "20"}, {"cityCode": "1138300", "warningCode": "20"}, {"cityCode": "1138500", "warningCode": "20"}, {"cityCode": "1140800", "warningCode": "20"}, {"cityCode": "1144200", "warningCode": "20"}, {"cityCode": "1146400", "warningCode": "20"}, {"cityCode": "1146500", "warningCode": "20"}, {"cityCode": "0820100", "warningCode": "20"}, {"cityCode": "0820300", "warningCode": "20"}, {"cityCode": "0820400", "warningCode": "20"}, {"cityCode": "0820500", "warningCode": "20"}, {"cityCode": "0820700", "warningCode": "20"}, {"cityCode": "0820800", "warningCode": "20"}, {"cityCode": "0821000", "warningCode": "20"}, {"cityCode": "0821100", "warningCode": "20"}, {"cityCode": "0821200", "warningCode": "20"}, {"cityCode": "0821600", "warningCode": "20"}, {"cityCode": "0821700", "warningCode": "20"}, {"cityCode": "0821900", "warningCode": "20"}, {"cityCode": "0822000", "warningCode": "20"}, {"cityCode": "0822300", "warningCode": "20"}, {"cityCode": "0822400", "warningCode": "20"}, {"cityCode": "0822500", "warningCode": "20"}, {"cityCode": "0822600", "warningCode": "20"}, {"cityCode": "0822700", "warningCode": "20"}, {"cityCode": "0822800", "warningCode": "20"}, {"cityCode": "0822900", "warningCode": "20"}, {"cityCode": "0823000", "warningCode": "20"}, {"cityCode": "0823100", "warningCode": "20"}, {"cityCode": "0823300", "warningCode": "20"}, {"cityCode": "0823500", "warningCode": "20"}, {"cityCode": "0823600", "warningCode": "20"}, {"cityCode": "0830200", "warningCode": "20"}, {"cityCode": "0831000", "warningCode": "20"}, {"cityCode": "0836400", "warningCode": "20"}, {"cityCode": "0844200", "warningCode": "20"}, {"cityCode": "0844300", "warningCode": "20"}, {"cityCode": "0844700", "warningCode": "20"}, {"cityCode": "0852100", "warningCode": "20"}, {"cityCode": "0854200", "warningCode": "20"}, {"cityCode": "0854600", "warningCode": "20"}, {"cityCode": "0856400", "warningCode": "20"}, {"cityCode": "0420800", "warningCode": "20"}, {"cityCode": "0421200", "warningCode": "20"}, {"cityCode": "0421501", "warningCode": "20"}, {"cityCode": "0432300", "warningCode": "20"}, {"cityCode": "0434100", "warningCode": "20"}, {"cityCode": "0450100", "warningCode": "20"}, {"cityCode": "0450500", "warningCode": "20"}, {"cityCode": "2020100", "warningCode": "20"}, {"cityCode": "2020201", "warningCode": "20"}, {"cityCode": "2020500", "warningCode": "20"}, {"cityCode": "2020700", "warningCode": "20"}, {"cityCode": "2020800", "warningCode": "20"}, {"cityCode": "2020900", "warningCode": "20"}, {"cityCode": "2021000", "warningCode": "20"}, {"cityCode": "2021100", "warningCode": "20"}, {"cityCode": "2021200", "warningCode": "20"}, {"cityCode": "2021300", "warningCode": "20"}, {"cityCode": "2021501", "warningCode": "20"}, {"cityCode": "2021700", "warningCode": "20"}, {"cityCode": "2021800", "warningCode": "20"}, {"cityCode": "2022000", "warningCode": "20"}, {"cityCode": "2030300", "warningCode": "20"}, {"cityCode": "2030400", "warningCode": "20"}, {"cityCode": "2030500", "warningCode": "20"}, {"cityCode": "2030600", "warningCode": "20"}, {"cityCode": "2030700", "warningCode": "20"}, {"cityCode": "2030900", "warningCode": "20"}, {"cityCode": "2032100", "warningCode": "20"}, {"cityCode": "2032300", "warningCode": "20"}, {"cityCode": "2032400", "warningCode": "20"}, {"cityCode": "2038200", "warningCode": "20"}, {"cityCode": "2038300", "warningCode": "20"}, {"cityCode": "2038400", "warningCode": "20"}, {"cityCode": "2038500", "warningCode": "20"}, {"cityCode": "2038600", "warningCode": "20"}, {"cityCode": "2038800", "warningCode": "20"}, {"cityCode": "2040200", "warningCode": "20"}, {"cityCode": "2040300", "warningCode": "20"}, {"cityCode": "2040400", "warningCode": "20"}, {"cityCode": "2040700", "warningCode": "20"}, {"cityCode": "2040900", "warningCode": "20"}, {"cityCode": "2041000", "warningCode": "20"}, {"cityCode": "2041100", "warningCode": "20"}, {"cityCode": "2041200", "warningCode": "20"}, {"cityCode": "2041300", "warningCode": "20"}, {"cityCode": "2041400", "warningCode": "20"}, {"cityCode": "2041500", "warningCode": "20"}, {"cityCode": "2041600", "warningCode": "20"}, {"cityCode": "2041700", "warningCode": "20"}, {"cityCode": "2044600", "warningCode": "20"}, {"cityCode": "2044800", "warningCode": "20"}, {"cityCode": "2045000", "warningCode": "20"}, {"cityCode": "2045100", "warningCode": "20"}, {"cityCode": "2045200", "warningCode": "20"}, {"cityCode": "2048100", "warningCode": "20"}, {"cityCode": "2048200", "warningCode": "20"}, {"cityCode": "2048500", "warningCode": "20"}, {"cityCode": "2048600", "warningCode": "20"}, {"cityCode": "2052100", "warningCode": "20"}, {"cityCode": "2054100", "warningCode": "20"}, {"cityCode": "2054300", "warningCode": "20"}, {"cityCode": "2056100", "warningCode": "20"}, {"cityCode": "2056200", "warningCode": "20"}, {"cityCode": "2056300", "warningCode": "20"}, {"cityCode": "2058300", "warningCode": "20"}, {"cityCode": "2058800", "warningCode": "20"}, {"cityCode": "2059000", "warningCode": "20"}, {"cityCode": "2060200", "warningCode": "20"}, {"cityCode": "4420100", "warningCode": "20"}, {"cityCode": "4420200", "warningCode": "20"}, {"cityCode": "4420300", "warningCode": "20"}, {"cityCode": "4420400", "warningCode": "20"}, {"cityCode": "4420500", "warningCode": "20"}, {"cityCode": "4420600", "warningCode": "20"}, {"cityCode": "4420700", "warningCode": "20"}, {"cityCode": "4420800", "warningCode": "20"}, {"cityCode": "4420900", "warningCode": "20"}, {"cityCode": "4421000", "warningCode": "20"}, {"cityCode": "4421100", "warningCode": "20"}, {"cityCode": "4421200", "warningCode": "20"}, {"cityCode": "4421300", "warningCode": "20"}, {"cityCode": "4421400", "warningCode": "20"}, {"cityCode": "4434100", "warningCode": "20"}, {"cityCode": "4446100", "warningCode": "20"}, {"cityCode": "4446200", "warningCode": "20"}, {"cityCode": "4310000", "warningCode": "20"}, {"cityCode": "4320200", "warningCode": "20"}, {"cityCode": "4320300", "warningCode": "20"}, {"cityCode": "4320400", "warningCode": "20"}, {"cityCode": "4320500", "warningCode": "20"}, {"cityCode": "4320600", "warningCode": "20"}, {"cityCode": "4320800", "warningCode": "20"}, {"cityCode": "4321000", "warningCode": "20"}, {"cityCode": "4321100", "warningCode": "20"}, {"cityCode": "4321300", "warningCode": "20"}, {"cityCode": "4321400", "warningCode": "20"}, {"cityCode": "4321600", "warningCode": "20"}, {"cityCode": "4334800", "warningCode": "20"}, {"cityCode": "4336400", "warningCode": "20"}, {"cityCode": "4336700", "warningCode": "20"}, {"cityCode": "4336800", "warningCode": "20"}, {"cityCode": "4336900", "warningCode": "20"}, {"cityCode": "4340300", "warningCode": "20"}, {"cityCode": "4340400", "warningCode": "20"}, {"cityCode": "4342300", "warningCode": "20"}, {"cityCode": "4342400", "warningCode": "20"}, {"cityCode": "4342500", "warningCode": "20"}, {"cityCode": "4342800", "warningCode": "20"}, {"cityCode": "4343200", "warningCode": "20"}, {"cityCode": "4343300", "warningCode": "20"}, {"cityCode": "4344100", "warningCode": "20"}, {"cityCode": "4344200", "warningCode": "20"}, {"cityCode": "4344300", "warningCode": "20"}, {"cityCode": "4344400", "warningCode": "20"}, {"cityCode": "4344700", "warningCode": "20"}, {"cityCode": "4346800", "warningCode": "20"}, {"cityCode": "4348200", "warningCode": "20"}, {"cityCode": "4348400", "warningCode": "20"}, {"cityCode": "4350100", "warningCode": "20"}, {"cityCode": "4350500", "warningCode": "20"}, {"cityCode": "4350600", "warningCode": "20"}, {"cityCode": "4350700", "warningCode": "20"}, {"cityCode": "4351000", "warningCode": "20"}, {"cityCode": "4351100", "warningCode": "20"}, {"cityCode": "4351200", "warningCode": "20"}, {"cityCode": "4351300", "warningCode": "20"}, {"cityCode": "4351400", "warningCode": "20"}, {"cityCode": "0720100", "warningCode": "20"}, {"cityCode": "0720200", "warningCode": "20"}, {"cityCode": "0720301", "warningCode": "20"}, {"cityCode": "0720302", "warningCode": "20"}, {"cityCode": "0720500", "warningCode": "20"}, {"cityCode": "0720700", "warningCode": "20"}, {"cityCode": "0720800", "warningCode": "20"}, {"cityCode": "0721000", "warningCode": "20"}, {"cityCode": "0721100", "warningCode": "20"}, {"cityCode": "0721300", "warningCode": "20"}, {"cityCode": "0721400", "warningCode": "20"}, {"cityCode": "0730100", "warningCode": "20"}, {"cityCode": "0730300", "warningCode": "20"}, {"cityCode": "0730800", "warningCode": "20"}, {"cityCode": "0732200", "warningCode": "20"}, {"cityCode": "0734200", "warningCode": "20"}, {"cityCode": "0734401", "warningCode": "20"}, {"cityCode": "0734402", "warningCode": "20"}, {"cityCode": "0736200", "warningCode": "20"}, {"cityCode": "0736400", "warningCode": "20"}, {"cityCode": "0736700", "warningCode": "20"}, {"cityCode": "0736800", "warningCode": "20"}, {"cityCode": "0740200", "warningCode": "20"}, {"cityCode": "0740500", "warningCode": "20"}, {"cityCode": "0740700", "warningCode": "20"}, {"cityCode": "0740800", "warningCode": "20"}, {"cityCode": "0742100", "warningCode": "20"}, {"cityCode": "0742200", "warningCode": "20"}, {"cityCode": "0742300", "warningCode": "20"}, {"cityCode": "0744400", "warningCode": "20"}, {"cityCode": "0744500", "warningCode": "20"}, {"cityCode": "0744600", "warningCode": "20"}, {"cityCode": "0744700", "warningCode": "20"}, {"cityCode": "0746100", "warningCode": "20"}, {"cityCode": "0746400", "warningCode": "20"}, {"cityCode": "0746500", "warningCode": "20"}, {"cityCode": "0746600", "warningCode": "20"}, {"cityCode": "0748100", "warningCode": "20"}, {"cityCode": "0748200", "warningCode": "20"}, {"cityCode": "0748300", "warningCode": "20"}, {"cityCode": "0748400", "warningCode": "20"}, {"cityCode": "0750100", "warningCode": "20"}, {"cityCode": "0750200", "warningCode": "20"}, {"cityCode": "0750300", "warningCode": "20"}, {"cityCode": "0750400", "warningCode": "20"}, {"cityCode": "0750500", "warningCode": "20"}, {"cityCode": "0752100", "warningCode": "20"}, {"cityCode": "0752200", "warningCode": "20"}, {"cityCode": "0754400", "warningCode": "20"}, {"cityCode": "0754800", "warningCode": "20"}, {"cityCode": "0756400", "warningCode": "20"}, {"cityCode": "0320100", "warningCode": "20"}, {"cityCode": "0320500", "warningCode": "20"}, {"cityCode": "0320600", "warningCode": "20"}, {"cityCode": "0320800", "warningCode": "20"}, {"cityCode": "0320900", "warningCode": "20"}, {"cityCode": "0321300", "warningCode": "20"}, {"cityCode": "0321400", "warningCode": "20"}, {"cityCode": "0321500", "warningCode": "20"}, {"cityCode": "0321600", "warningCode": "20"}, {"cityCode": "0330100", "warningCode": "20"}, {"cityCode": "0330200", "warningCode": "20"}, {"cityCode": "0330300", "warningCode": "20"}, {"cityCode": "0332100", "warningCode": "20"}, {"cityCode": "0332200", "warningCode": "20"}, {"cityCode": "0336600", "warningCode": "20"}, {"cityCode": "0338100", "warningCode": "20"}, {"cityCode": "0340200", "warningCode": "20"}, {"cityCode": "0344100", "warningCode": "20"}, {"cityCode": "0350100", "warningCode": "20"}, {"cityCode": "0350600", "warningCode": "20"}, {"cityCode": "0352400", "warningCode": "20"}, {"cityCode": "4630400", "warningCode": "50"}, {"cityCode": "4653100", "warningCode": "50"}, {"cityCode": "4420800", "warningCode": "50"}, {"cityCode": "4420400", "warningCode": "50"}, {"cityCode": "4446100", "warningCode": "50"}, {"cityCode": "4421300", "warningCode": "50"}, {"cityCode": "4421200", "warningCode": "50"}, {"cityCode": "4321400", "warningCode": "50"}, {"cityCode": "4342500", "warningCode": "50"}, {"cityCode": "4342800", "warningCode": "50"}, {"cityCode": "4343300", "warningCode": "50"}, {"cityCode": "4342300", "warningCode": "50"}, {"cityCode": "4320800", "warningCode": "50"}, {"cityCode": "4321000", "warningCode": "50"}, {"cityCode": "4021000", "warningCode": "50"}, {"cityCode": "4022900", "warningCode": "50"}, {"cityCode": "4520300", "warningCode": "50"}, {"cityCode": "4544100", "warningCode": "50"}, {"cityCode": "4630400", "warningCode": "50"}, {"cityCode": "4630400", "warningCode": "50"}, {"cityCode": "0120200", "warningCode": "03"}]
+[
+    {
+        "cityCode": "2020201",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2021501",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2022000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2044600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2044800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2045000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2045100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2045200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4520200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4520500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4520900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4534100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4536100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4620600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4620800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4621501",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4621800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4622400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4622500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4639200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4640400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4645200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1020100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1020200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1020300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1020400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1020500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1020700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1020800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1020900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1021000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1021100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1021200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1034400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1034500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1036600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1036700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1038200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1038300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1038400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1046400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1052100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1052200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1052300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1052400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1052500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0920100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0920200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0920300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0920400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0920500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0920800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0920900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0921400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0921500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0921600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0930100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0934200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0934300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0934400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0934500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0936100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0936400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0938600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0941100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0720100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0720200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0720301",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0720302",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0720500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0720700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0720800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0721000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0721100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0721300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0721400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0730100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0730300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0730800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0732200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0734200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0734401",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0734402",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0736200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0736400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0736700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0736800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0740200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0740500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0740700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0740800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0742100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0742200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0742300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0744400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0744500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0744600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0744700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0746100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0746400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0746500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0746600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0748100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0748200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0748300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0748400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0750100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0750200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0750300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0750400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0750500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0752100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0752200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0754400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0754800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0756400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0320100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0320500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0320600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0320800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0320900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0321300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0321400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0321500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0321600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0330100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0330200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0330300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0332100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0332200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0336600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0338100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0340200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0344100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0350100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0350600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0352400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1210000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1220300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1220400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1220600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1220700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1220800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1221000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1221100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1221200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1221300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1221600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1221700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1221900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1222000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1222100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1222200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1222400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1222500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1222600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1222700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1222800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1222900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1223000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1223100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1223200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1223300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1223600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1232200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1232900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1234200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1234700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1234900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1240900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1242200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1242600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1242700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1244100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1110000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1120100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1120200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1120300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1120600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1120700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1120800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1120900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1121000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1121100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1121200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1121400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1121500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1121600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1121700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1121800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1121900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1122100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1122200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1122300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1122400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1122500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1122700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1122800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1122900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1123000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1123100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1123200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1123300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1123400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1123500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1123700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1123800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1123900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1124000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1124100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1124200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1124300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1124500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1124600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1130100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1132400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1132600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1132700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1134100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1134200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1134300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1134600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1134700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1134800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1134900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1136100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1136200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1136300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1136500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1136900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1138100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1138300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1138500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1140800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1144200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1146400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "1146500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0820100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0820300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0820400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0820500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0820700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0820800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0821000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0821100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0821200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0821600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0821700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0821900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0822000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0822300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0822400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0822500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0822600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0822700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0822800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0822900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0823000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0823100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0823300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0823500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0823600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0830200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0831000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0836400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0844200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0844300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0844700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0852100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0854200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0854600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0856400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0420800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0421200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0421501",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0432300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0434100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0450100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "0450500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2020100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2020201",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2020500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2020700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2020800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2020900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2021000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2021100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2021200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2021300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2021501",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2021700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2021800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2022000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2030300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2030400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2030500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2030600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2030700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2030900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2032100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2032300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2032400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2038200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2038300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2038400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2038500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2038600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2038800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2040200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2040300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2040400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2040700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2040900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2041000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2041100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2041200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2041300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2041400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2041500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2041600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2041700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2044600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2044800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2045000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2045100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2045200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2048100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2048200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2048500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2048600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2052100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2054100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2054300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2056100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2056200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2056300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2058300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2058800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2059000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "2060200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4420100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4420200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4420300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4420400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4420500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4420600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4420700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4420800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4420900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4421000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4421100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4421200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4421300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4421400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4434100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4446100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4446200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4310000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4320200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4320300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4320400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4320500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4320600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4320800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4321000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4321100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4321300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4321400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4321600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4334800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4336400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4336700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4336800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4336900",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4340300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4340400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4342300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4342400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4342500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4342800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4343200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4343300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4344100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4344200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4344300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4344400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4344700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4346800",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4348200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4348400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4350100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4350500",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4350600",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4350700",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4351000",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4351100",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4351200",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4351300",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4351400",
+        "warningCode": "20"
+    },
+    {
+        "cityCode": "4630400",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4653100",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4420800",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4420400",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4446100",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4421300",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4421200",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4321400",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4342500",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4342800",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4343300",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4342300",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4320800",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4321000",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4021000",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4022900",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4520300",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4544100",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4630400",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "4630400",
+        "warningCode": "50"
+    },
+    {
+        "cityCode": "0120200",
+        "warningCode": "03"
+    }
+]
