@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="hakodate-a05">
+            <meta name="format-detection" content="telephone=no,address=no,email=no">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="robots" content="noindex,nofollow">
+            <link rel="stylesheet" href="design_test.css">
+            <title>hakodate-a05</title>
+            <script type="text/javascript">
+              function test() {
+                if (window.confirm("現在地を取得します。")){
+                  navigator.geolocation.getCurrentPosition(success,fail);
+                }else{
+                  window.alert('キャンセルしました。');
+                }
+              }
+
+              function success(pos){
+                const lat = pos.coords.latitude;   //緯度を取得して定数latに代入
+                const lng = pos.coords.longitude;  //経度を取得して定数lngに代入
+                const accuracy = pos.coords.accuracy;  //同じく精度を定数accuracyに代入
+                window.alert('pos');
+
+
+                var url = 'http://localhost:8000'; // リクエスト先URL
+                var data = 'param=value&p=v'; // 送信データ ('param=value&...')
+                var request = new XMLHttpRequest();
+                request.open('POST', url);
+                request.onreadystatechange = function () {
+                    if (request.readyState != 4) {
+                      // リクエスト中
+                    } else if (request.status != 200) {
+                      // 失敗
+                      console.log(request.status);
+                      console.log('bad!')
+                    } else {
+                      // 送信成功
+                      console.log('good!')
+                      var result = request.responseText;
+                      console.log(result)
+                    }
+                };
+                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                request.send(data);
+              }
+
+              function fail(error){
+                window.alert('位置情報の取得に失敗しました。エラーコード：' + error.code)
+              }
+            </script>
+            <!--<link rel="shortcut icon" href="/img/hakodatekousen_kousyo.jpg" >-->
+            <!--<link rel="stylesheet" href="hakodate-a05.css">-->
+
+        </head>
+        <body>
+          <div class="title">
+            <div class="title-left">
+              <p id=title_text>現在地取得</p>
+                <div class="left-p">
+                  <p>hakodate-a05</p>
+                </div>
+            </div>
+          </div>
+          <div class="message">
+            <p>避難所まで案内するために、あなたの現在地情報が必要です。<br>もし同意していただける場合、下記の同意を選択し現在地を取得のボタンをクリックしてください。</p>
+          </div>
+          <!--<div class="top-wrapper">
+            <div class="container">
+              <h2 class="heading-top-1">お任せてください。</h2>
+              <h2 class="heading-top-2">安全な場所まであなたを誘導いたします。</h2>
+              <h3 class="heading-top-3">hakodate-a05</h3>
+            </div>
+          </div>-->
+          <div class="area">
+            <a class="btn_10" onclick="test()"><span>現在位置を取得</span></a>
+          </div>            
+        </body>
+    </html>
