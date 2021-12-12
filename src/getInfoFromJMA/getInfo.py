@@ -9,6 +9,7 @@ import pprint as pp
 import json
 
 def getInfo():
+    print('CALLED \'src/getInfoFromJMA/getInfo.py\'')
     isTest = False
     # this function dose ...
     # ~ get information from JAM server

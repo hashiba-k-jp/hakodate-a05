@@ -5,7 +5,7 @@ from src.findNearestEvacuation.find_evacuation_point import find_evacuation_poin
 from src.getInfoFromJMA.init import init
 
 # get data from JMA and run the program each same time.
-### import initApp
+import initApp
 
 app = Flask(__name__)
 
