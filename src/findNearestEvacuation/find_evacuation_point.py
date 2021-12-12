@@ -12,12 +12,12 @@ import numpy as np
 import pprint as pp
 import sys
 
-def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isTest=True, GPS=None, userID=None):
+def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isTest=False, GPS=None, userID=None):
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [1] get API key
     try:
-        from data.APIKEY import APIKEY
+        from src.findNearestEvacuation.data.APIKEY import APIKEY
     except ModuleNotFoundError:
         ### print('ModuleNotFoundError')
         ### print('The APIKEY.py does NOT exist on same directry.')
@@ -50,15 +50,15 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
             print('ERROR : GPS is None')
             exit()
         else:
-            N = GPS['N']
-            E = GPS['E']
+            N = float(GPS['N'])
+            E = float(GPS['E'])
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [3] load all evacuation points of Hokkaido from .json data
     # THIS FILE IS NOT ON THE GitHUb BECAUSE OF LICENSE PROBLEMS.
     try:
-        with open('data/mergeFromCity.json', 'r') as f:
+        with open('src/findNearestEvacuation/data/mergeFromCity.json', 'r') as f:
             points = json.load(f)
     except FileNotFoundError:
         print('ModuleNotFoundError')
@@ -124,21 +124,21 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
         point.append(distMeter)
         point.append(distTime)
 
-    print('current address is {}'.format(currentAddress))
-    print('tareget hazard is {}'.format(hazardTypeName[hazardType]))
-    print('id, name, Euclidean_Dist(km), distance(m), walking time(sec)')
+    ### print('current address is {}'.format(currentAddress))
+    ### print('tareget hazard is {}'.format(hazardTypeName[hazardType]))
+    ### print('id, name, Euclidean_Dist(km), distance(m), walking time(sec)')
     possibleList.sort(key = lambda x: x[4])
-    pp.pprint(possibleList)
+    ### pp.pprint(possibleList)
 
     url = 'https://www.google.com/maps/dir/' + str(N) + ',+' + str(E) +\
           '/' + points[possibleList[0][0]]['geopoint']['North'] + ',+' + points[possibleList[0][0]]['geopoint']['East'] + '/'
-    print('-='*25)
-    pp.pprint({
+    ### print('-='*25)
+    returnData = {
         'userID': userID,
         'url': url
-    })
+    }
 
-    return 'successed!'
+    return returnData
 
 
 # This is for the TEST run
