@@ -31,6 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	font-family: "Gill Sans Extrabold", "游ゴシック","游ゴシック体",sans-serif;
 }
 ol, ul {
 	list-style: none;
@@ -56,6 +57,7 @@ a {
 }
 #title_text{
 	font-size: 2rem;
+	font-weight: 600;
 }
 .title-left{
 	padding:20px;

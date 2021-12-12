@@ -1,3 +1,5 @@
+
+   
 function load() {
   alert("ページが読み込まれました！");
   var param = location.search;
@@ -58,4 +60,3 @@ function getParam(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-
