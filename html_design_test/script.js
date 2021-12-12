@@ -1,20 +1,25 @@
 function load() {
-  alert("ページが読み込まれました！");
+  // alert("ページが読み込まれました！");
   var param = location.search;
-  alert(param);
+  console.log(param);
   userID = getParam('userID');
-  if(userID == null){alert('userID is null!');}
+  if(userID == null){
+    console.log('userID is null!');
+  }else{
+    console.log('userID is ' + userID);
+  }
   warningCode = getParam('warningCode');
-  if(warningCode == null){alert('warningCode is null!');}
+  if(warningCode == null){
+    console.log('warningCode is null!');
+  }else{
+    console.log('warningCode is ' + warningCode);
+  }
+  // ?userID=12345&warningCode=30
 }
 window.onload = load;
 
 function test() {
-  if (window.confirm("現在地を取得します。")){
-    navigator.geolocation.getCurrentPosition(success,fail);
-  }else{
-    window.alert('キャンセルしました。');
-  }
+  navigator.geolocation.getCurrentPosition(success,fail);
 }
 
 function success(pos){
@@ -58,4 +63,3 @@ function getParam(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-

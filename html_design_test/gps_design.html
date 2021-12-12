@@ -1,10 +1,14 @@
 <!DOCTYPE html>
     <html>
         <head>
-          <meta charset="utf-8">
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-          <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+          <!--
+            input URL is
+            http://<url>?userID=<userID>&warningCode=<warningCode>
 
+            output (POST) data is
+            'userID=' + <userID> + '&warningCode=' + <warningCode> + '&lat=' + <latitude> + '&lng=' + <longitude>
+          -->
+          <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta name="description" content="hakodate-a05">
           <meta name="format-detection" content="telephone=no,address=no,email=no">
