@@ -27,10 +27,11 @@ function success(pos){
   const lng = pos.coords.longitude;  //経度を取得して定数lngに代入
   const accuracy = pos.coords.accuracy;  //同じく精度を定数accuracyに代入
   // window.alert('pos');
-  var url = 'http://localhost:8000'; // リクエスト先URL
-  var data = 'lat=' + lat + '&lng=' + lng; // 送信データ ('param=value&...')
+  var url = 'http://localhost:5001/location'; // リクエスト先URL
+  var data = 'lat=' + lat + '&lng=' + lng + '&userID=' + userID + '&warningCode=' + warningCode ; // 送信データ ('param=value&...')
   var request = new XMLHttpRequest();
-  request.open('POST', url);
+  var postUrl = location.protocol + '//' + location.hostname + ':' + location.port + '' + location.pathname;
+  request.open('POST', postUrl);
   request.onreadystatechange = function () {
       if (request.readyState != 4) {
         // リクエスト中
