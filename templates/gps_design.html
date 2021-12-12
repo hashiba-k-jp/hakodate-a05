@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+          <!--
+            input URL is
+            http://<url>?userID=<userID>&warningCode=<warningCode>
+
+            output (POST) data is
+            'userID=' + <userID> + '&warningCode=' + <warningCode> + '&lat=' + <latitude> + '&lng=' + <longitude>
+          -->
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta name="description" content="hakodate-a05">
+          <meta name="format-detection" content="telephone=no,address=no,email=no">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="robots" content="noindex,nofollow">
+          <link rel="stylesheet" href="static/css/design_test.css">
+          <title>hakodate-a05</title>
+          <script src="static/js/script.js" defer></script>
+          <!--<link rel="shortcut icon" href="/img/hakodatekousen_kousyo.jpg" >-->
+          <!--<link rel="stylesheet" href="hakodate-a05.css">-->
+
+        </head>
+        <body>
+          <div class="title">
+            <div class="title-left">
+              <p id=title_text>現在地取得</p>
+                <div class="left-p">
+                  <p>hakodate-a05</p>
+                </div>
+            </div>
+          </div>
+          <div class="message">
+            <p>避難所まで案内するために、あなたの現在地情報が必要です。<br>もし同意していただける場合、下記のボタンをクリックしてください。</p>
+          </div>
+          <div class="copyright">
+            <p>国土地理院・指定緊急避難場所データ(https://hinan.gsi.go.jp/hinanjocjp/hinanbasho/koukaidate.html)を利用</p>
+          </div>
+          <!--<div class="top-wrapper">
+            <div class="container">
+              <h2 class="heading-top-1">お任せてください。</h2>
+              <h2 class="heading-top-2">安全な場所まであなたを誘導いたします。</h2>
+              <h3 class="heading-top-3">hakodate-a05</h3>
+            </div>
+          </div>-->
+          <div class="area">
+            <a class="btn_10" onclick="test()"><span>現在位置を取得</span></a>
+          </div>
+        </body>
+    </html>
