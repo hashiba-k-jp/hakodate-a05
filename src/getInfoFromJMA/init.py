@@ -23,4 +23,4 @@ def init():
         'Earthquake': last_e
     }
     with open('src/getInfoFromJMA/data/lastInfo.json', 'w') as f:
-        json.dump(lastInfoOut, f, ensure_ascii=True)
+        json.dump(lastInfoOut, f, ensure_ascii=True, indent=4, sort_keys=True, separators=(',', ': '))
