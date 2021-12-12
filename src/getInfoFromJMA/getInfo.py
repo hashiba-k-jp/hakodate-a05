@@ -9,7 +9,7 @@ import pprint as pp
 import json
 
 def getInfo():
-    isTest = True
+    isTest = False
     # this function dose ...
     # ~ get information from JAM server
     # ~ create list of tareget city codes with code of warning type
@@ -17,7 +17,7 @@ def getInfo():
 
     # check the last information
     try:
-        with open('lastInfo.json', 'r') as f:
+        with open('src/getInfoFromJMA/data/lastInfo.json', 'r') as f:
             lastInfo  = json.load(f)
     except FileNotFoundError:
         lastInfo = {
@@ -89,7 +89,7 @@ def getInfo():
 
     if noUpdate:
         print('No Update!')
-        exit()
+        return 0
 
     entries = [
         Entry(
@@ -113,17 +113,16 @@ def getInfo():
             'warningCode': '03',
         })
 
-    if isTest:
-        pp.pprint(data)
-        with open('disasterList.json', 'w') as f:
-            json.dump(data, f, ensure_ascii=True, indent=4, sort_keys=True, separators=(',', ': '))
+    pp.pprint(data)
+    with open('src/getInfoFromJMA/data/disasterList.json', 'w') as f:
+        json.dump(data, f, ensure_ascii=True, indent=4, sort_keys=True, separators=(',', ': '))
 
     # record the last information
     lastInfoOut = {
         'Warning': infoSetW[0]['url'],
         'Earthquake': infoSetE[0]['url']
     }
-    with open('lastInfo.json', 'w', encoding='UTF-8') as f:
+    with open('src/getInfoFromJMA/data/lastInfo.json', 'w', encoding='UTF-8') as f:
         json.dump(lastInfoOut, f, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
 
 
@@ -191,13 +190,3 @@ class Entry:
                 # volcanicHazard
                 pass
 
-
-
-
-
-
-
-
-
-#
-getInfo()

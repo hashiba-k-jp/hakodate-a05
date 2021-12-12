@@ -22,8 +22,5 @@ def init():
         'Warning': last_w,
         'Earthquake': last_e
     }
-    with open('lastInfo.json', 'w') as f:
+    with open('src/getInfoFromJMA/data/lastInfo.json', 'w') as f:
         json.dump(lastInfoOut, f, ensure_ascii=True)
-
-
-init()
