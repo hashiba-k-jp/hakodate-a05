@@ -79,7 +79,7 @@ def getInfo():
             break
         else:
             noUpdate = False
-            if info['title'] in ['気象特別警報・警報・注意報']:
+            if info['title'] in ['気象特別警報・警報・注意報', '土砂災害警戒情報']:
                 infoSet.append(info)
     # no process (earthquake)
     for info in infoSetE:
@@ -87,12 +87,15 @@ def getInfo():
             break
         else:
             noUpdate = False
-            if info['title'] in ['震源・震度に関する情報']:
+            if info['title'] in ['震源・震度に関する情報', '噴火警報・予報']:
                 infoSet.append(info)
 
     if noUpdate:
         print('No Update!')
-        return 0
+        if isTest:
+            print('Test data will be added, this program won\'t end here.')
+        else:
+            return 0
 
     entries = [
         Entry(
@@ -120,6 +123,8 @@ def getInfo():
     with open('src/getInfoFromJMA/data/disasterList.json', 'w') as f:
         json.dump(data, f, ensure_ascii=True, indent=4, sort_keys=True, separators=(',', ': '))
 
+    if isTest:
+        pass
     # record the last information
     lastInfoOut = {
         'Warning': infoSetW[0]['url'],
@@ -158,38 +163,47 @@ class Entry:
 
 
     def details(self):
+        res = requests.get(self.url)
+        res.encoding = res.apparent_encoding
+        Bs4 = bs(res.text, 'lxml-xml')
         if self.type == 'Warning':
-            res = requests.get(self.url)
-            res.encoding = res.apparent_encoding
-            Bs4 = bs(res.text, 'lxml-xml')
-            items = Bs4.select('Report > Head > Headline > Information[type=\"気象警報・注意報（市町村等）\"] > Item')
-            # w stands for Weather
-            # c stands for cities
-            # These 4 variables do not have been saved in self.
-            self.wCodes = [i.select_one('Kind > Code').text for i in items]
-            self.cCodes = [i.select_one('Area > Code').text for i in items]
-            for wCode, cCode in zip(self.wCodes, self.cCodes):
-                if wCode in ['03', '04', '05', '08', '20', '33', '35', '38']:
-                    self.data.append({
-                        'cityCode': cCode,
-                        'warningCode': wCode
-                    })
+            if self.title == '気象特別警報・警報・注意報':
+                items = Bs4.select('Report > Head > Headline > Information[type=\"気象警報・注意報（市町村等）\"] > Item')
+                # w stands for Weather
+                # c stands for cities
+                # These 4 variables do not have been saved in self.
+                self.wCodes = [i.select_one('Kind > Code').text for i in items]
+                self.cCodes = [i.select_one('Area > Code').text for i in items]
+                for wCode, cCode in zip(self.wCodes, self.cCodes):
+                    if wCode in ['03', '04', '05', '08', '20', '33', '35', '38']:
+                        self.data.append({
+                            'cityCode': cCode,
+                            'warningCode': wCode
+                        })
+            elif self.title == '土砂災害警戒情報':
+                items = Bs4.select('Report > Body > warning[type=\"土砂災害警戒情報\"] > Item')
+                for item in items:
+                    code = item.select_one('Kind > Code').text
+                    if code == '3':
+                        cCode = item.select_one('Area > Code').text
+                        self.data.append({
+                            'cityCode': cCode,
+                            'warningCode': '70'
+                        })
+                        # '70': 'landslideDisaster' (勝手に定義)
         elif self.type == 'Earthquake':
-            res = requests.get(self.url)
-            res.encoding = res.apparent_encoding
-            Bs4 = bs(res.text, 'lxml-xml')
             # Earthquake (Intensity: 1≤ )
             if self.title == '震源・震度に関する情報':
                 code = [i.text for i in Bs4.select('Body > Intensity > Observation > Pref > Area > City > Code')]
                 int = [i.text for i in Bs4.select('Body > Intensity > Observation > Pref > Area > City > MaxInt')]
                 data = []
                 for code, int in zip(code, int):
-                    if int in ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7']:
+                    if int in ['4', '5-', '5+', '6-', '6+', '7']:
                         self.data.append({
                             'cityCode': code,
                             'warningCode': '50'
                         })
-            elif 0:
+            elif self.title == '噴火警報・予報':
                 # volcanicHazard
                 pass
 

@@ -3,6 +3,7 @@ from src.findNearestEvacuation.test import test_app
 from src.findNearestEvacuation.find_evacuation_point import find_evacuation_point
 # from src.getInfoFromJMA.getInfo import getInfo, Entry
 from src.getInfoFromJMA.init import init
+import pprint as pp
 
 # get data from JMA and run the program each same time.
 import initApp
@@ -26,7 +27,7 @@ def get_location_post():
     # userID = <userID>
     # isTest = False
     test_app()
-    text = find_evacuation_point(
+    notiData = find_evacuation_point(
         currentAddress=None,
         hazardType=warningCode,
         isTest=False,
@@ -36,9 +37,34 @@ def get_location_post():
         },
         userID=userID
     )
-    print(text)
-
+    pp.pprint(notiData)
+    send_msg_with_line(
+        user_id=notiData['userID'],
+        msgs=notiData['url'],
+    )
     return "completed!"
+
+'''
+#LINEユーザにメッセージを送信する関数
+def send_msg_with_line(user_id,msgs):
+    send_msg = TextSendMessage(text='')
+    try:
+        line_bot_api = LineBotApi(ACCESS_TOKEN)
+
+        for msg in msgs:
+            if DEBUG == True:
+                print('SENDING MESSAGE:{}'.format(msg))
+            send_msg = TextSendMessage(text=msg)
+            line_bot_api.push_message(user_id,send_msg)
+    except linebot.exceptions.LineBotApiError as e:
+        print(e.error.message)
+        print(e.error.details)
+
+    for msg in msgs:
+        if DEBUG == True:
+            print('SENNDING MESSAGE:{}'.format(msg))
+
+'''
 
 if __name__ == "__main__":
     init()
