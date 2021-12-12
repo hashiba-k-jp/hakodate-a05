@@ -11,19 +11,17 @@ import numpy as np
 import pprint as pp
 import sys
 
-try:
-    from data.APIKEY import APIKEY
-except ModuleNotFoundError:
-    print('ModuleNotFoundError')
-    print('The APIKEY.py does NOT exist on same directry.')
-    exit()
-
-def find_evacuation_point(currentAddress="東京駅", hazardType='03', key=None, isTest=True, GPS=None, userID=None):
+def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isTest=True, GPS=None, userID=None):
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    # [1] get current address by google api without GPS
-    # ---NO CODE---
-    # get location data FROM GPS, NOT GOOGLE API
+    # [1] get API key
+    try:
+        from data.APIKEY import APIKEY
+    except ModuleNotFoundError:
+        ### print('ModuleNotFoundError')
+        ### print('The APIKEY.py does NOT exist on same directry.')
+        return 'failed : API KEY dose not exist!'
+        exit()
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [2.A] get latitude(N) and longitude(E) of current address
@@ -110,7 +108,7 @@ def find_evacuation_point(currentAddress="東京駅", hazardType='03', key=None,
         destN, destE = points[pointID]['geopoint']['North'], points[pointID]['geopoint']['East']
 
         url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' \
-        + str(N) + ', ' + str(E) + '&destination=' + str(destN) + ', ' + str(destE) + '&mode=walking&key=' + KEY
+        + str(N) + ', ' + str(E) + '&destination=' + str(destN) + ', ' + str(destE) + '&mode=walking&key=' + APIKEY
 
         response = requests.get(url)
         response.encoding = response.apparent_encoding
@@ -139,11 +137,11 @@ def find_evacuation_point(currentAddress="東京駅", hazardType='03', key=None,
         'url': url
     })
 
+    return 'successed!'
+
 
 # This is for the TEST run
 if __name__ == '__main__':
-    CA = '函館高専'
+    CA = 'JR函館駅'
     HT = '03'
-    KEY = APIKEY
-    # THIS KEY IS HIDDEN BECAUSE OF PROBLEMS ON SECURITY!
-    find_evacuation_point(currentAddress=CA, hazardType=HT, key=KEY)
+    find_evacuation_point(currentAddress=CA, hazardType=HT)
