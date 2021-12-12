@@ -1,14 +1,18 @@
 from flask import Flask, render_template, request
-from findNearestEvacuation.test import test_app
-from findNearestEvacuation.find_evacuation_point import find_evacuation_point
+from src.findNearestEvacuation.test import test_app
+from src.findNearestEvacuation.find_evacuation_point import find_evacuation_point
+# from src.getInfoFromJMA.getInfo import getInfo, Entry
+from src.getInfoFromJMA.initData import initData
+import pprint as pp
+
+# get data from JMA and run the program each same time.
+from initApp import initApp
 
 app = Flask(__name__)
-
 
 @app.route('/location', methods=['GET'])
 def get_location_get():
     return render_template('gps_design.html', title='Get Location App')
-
 
 @app.route('/location', methods=['POST'])
 def get_location_post():
@@ -23,7 +27,7 @@ def get_location_post():
     # userID = <userID>
     # isTest = False
     test_app()
-    text = find_evacuation_point(
+    notiData = find_evacuation_point(
         currentAddress=None,
         hazardType=warningCode,
         isTest=False,
@@ -33,10 +37,15 @@ def get_location_post():
         },
         userID=userID
     )
-    print(text)
-
+    pp.pprint(notiData)
+    send_msg_with_line(
+        user_id=notiData['userID'],
+        msgs=notiData['url'],
+    )
     return "completed!"
 
 if __name__ == "__main__":
+    initApp()
+    initData()
     app.run(debug=True, host='localhost', port=5001)
 
