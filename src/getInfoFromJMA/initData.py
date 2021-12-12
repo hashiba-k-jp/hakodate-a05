@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 import pprint as pp
 import json
 
-def init():
+def initData():
     print('CALLED \'src/getInfoFromJMA/init.py\'')
     url = "https://www.data.jma.go.jp/developer/xml/feed/extra.xml"
     res = requests.get(url)
