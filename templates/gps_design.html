@@ -8,35 +8,53 @@
             output (POST) data is
             'userID=' + <userID> + '&warningCode=' + <warningCode> + '&lat=' + <latitude> + '&lng=' + <longitude>
           -->
+
+          <!-- Required meta tags -->
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+          <!-- Bootstrap -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
           <meta name="description" content="hakodate-a05">
           <meta name="format-detection" content="telephone=no,address=no,email=no">
           <meta http-equiv="X-UA-Compatible" content="IE=edge">
           <meta name="robots" content="noindex,nofollow">
-          <link rel="stylesheet" href="static/css/design_test.css">
+          <!-- <link rel="stylesheet" href="static/css/bootstrap.css"> -->
+          <link rel="stylesheet" href="static/css/my-sheet.css">
           <title>hakodate-a05</title>
+          <style>
+          @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+          </style>
           <script src="static/js/script.js" defer></script>
-
         </head>
         <body>
-          <div class="title">
+          <div class="title container">
             <div class="title-left">
-              <p id=title_text>現在地取得</p>
-                <div class="left-p">
-                  <p>hakodate-a05</p>
-                </div>
+              <h6 class="display-6 fw-bold py-5">
+                避難所経路探索</br>
+                <small class="text-muted">hakodate-a05</small>
+              </h6>
             </div>
           </div>
-          <div class="message">
-            <p>避難所まで案内するために、あなたの現在地情報が必要です。<br>もし同意していただける場合、下記のボタンをクリックしてください。</p>
+          <div class="container py-1">
+            <p>最寄りの避難所までご案内するために、あなたの<b class="fw-bold">現在地情報</b>が必要です。<br>同意していただける場合、下記のボタンをクリックしてください。</p>
           </div>
-          <div class="message">
-            <!-- copyright -->
-            <p>国土地理院・指定緊急避難場所データ(https://hinan.gsi.go.jp/hinanjocjp/hinanbasho/koukaidate.html)を利用</p>
+          <div class="container py-1">
+            <button type="button" class="btn btn-outline-secondary" onclick="getLocation()">現在位置の取得</button>
           </div>
-          <div class="area">
-            <a class="btn_10" onclick="test()"><span>現在位置を取得</span></a>
+          <div class="container py-4">
+            出典<br>
+            <p>
+              国土地理院・指定緊急避難場所データ<br>
+              <a href="https://hinan.gsi.go.jp/hinanjocjp/hinanbasho/koukaidate.html">https://hinan.gsi.go.jp/hinanjocjp/hinanbasho/koukaidate.html</a>
+            </p>
+            <p>
+              気象警報等のデータ<br>
+              <a href="http://xml.kishou.go.jp/index.html">http://xml.kishou.go.jp/index.html</a>
+            </p>
           </div>
         </body>
     </html>

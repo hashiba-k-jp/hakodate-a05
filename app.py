@@ -38,10 +38,12 @@ def get_location_post():
         userID=userID
     )
     pp.pprint(notiData)
+    '''
     send_msg_with_line(
         user_id=notiData['userID'],
         msgs=notiData['url'],
     )
+    '''
     return "completed!"
 
 if __name__ == "__main__":
