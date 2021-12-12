@@ -10,7 +10,9 @@ import json
 
 def getInfo():
     print('CALLED \'src/getInfoFromJMA/getInfo.py\'')
-    isTest = False
+    isTest = True # add hakodate city and warningCode=20
+    isTestData = False # if true, update every time
+
     # this function dose ...
     # ~ get information from JAM server
     # ~ create list of tareget city codes with code of warning type
@@ -26,10 +28,10 @@ def getInfo():
             'Earthquake': ''
         }
 
-    pp.pprint(lastInfo)
+    ### pp.pprint(lastInfo)
 
     # THIS CODE IS JUST FOR TEST !!!
-    if isTest:
+    if isTestData:
         lastInfo = {
             'Warning': '',
             'Earthquake': ''
