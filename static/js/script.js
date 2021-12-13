@@ -32,6 +32,8 @@ function success(pos){
   var request = new XMLHttpRequest();
   var postUrl = location.protocol + '//' + location.hostname + ':' + location.port + '' + location.pathname;
   request.open('POST', postUrl);
+  document.getElementById('sendButton').textContent = '送信中';
+  document.getElementById('sendButton').disabled = true;
   request.onreadystatechange = function () {
       if (request.readyState != 4) {
         // リクエスト中
@@ -39,16 +41,23 @@ function success(pos){
         // 失敗
         console.log(request.status);
         console.log('bad!')
+        window.alert('送信失敗。')
+        document.getElementById('sendButton').textContent = '現在地情報を送信';
+        document.getElementById('sendButton').disabled = false;
       } else {
         // 送信成功
         console.log('good!')
         var result = request.responseText;
         console.log(result)
+        document.getElementById('sendButton').textContent = '送信完了';
+        document.getElementById('sendButton').disabled = true;
+        document.getElementById('afterSend').innerHTML = 'このタブは閉じてください。<br>LINE通知が届きます。';
+        document.getElementById('afterSend').classList.add = 'py-1';
       }
   };
+  console.log(request.status);
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   request.send(data);
-  window.alert('位置情報を送信しました。\nこのタブは閉じて下さい。')
 }
 
 function fail(error){
