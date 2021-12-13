@@ -168,16 +168,9 @@ def webhock():
                         id = cursor.fetchone()
                         conn.commit()
 
-                        #認証用のコード(6桁)を作成
-                        verify_code = secrets.randbelow(999999)
-                        verify_code = str(verify_code).zfill(6) #6桁になるように0埋め
-                        #認証用のコードをハッシュ化
-                        verify_hash = hashlib.sha256(verify_code.encode()).hexdigest()
-
                         #DBにUUIDとverify_hash,userのidを記録
-                        sql = "INSERT INTO public.verify(id,pass,user_id) VALUES ('{uuid}','{verify_pass}',{user_id});".format(
+                        sql = "INSERT INTO public.verify(id,user_id) VALUES ('{uuid}',{user_id});".format(
                             uuid=user_uuid,
-                            verify_pass=verify_hash,
                             user_id=id[0]
                         )
                         if DEBUG == True:
@@ -192,10 +185,7 @@ def webhock():
                             root_url=CONSOLE_ROOT_URL,
                             uuid=user_uuid
                         )
-                        verify_code_msg = '確認コードは{}です。webページに戻り入力してください'.format(
-                            str(verify_code)
-                        )
-                        send_msg_with_line(user_id=user_id, msgs=[url_msg,verify_code_msg])
+                        send_msg_with_line(user_id=user_id, msgs=[url_msg])
 
                         #DBとの接続を解除
                         cursor.close()
@@ -208,10 +198,23 @@ def webhock():
                 #全ての処理が正常終了した時200を返す
                 return '',200,{}
 
-        except psycopg2.Error as e:
-            print('DBへの書き込みエラー')
-            print(e.pgerror)
-            conn.close()
+        
+            
+        except psycopg2.IntegrityError:
+        	#verifyにuer_idの登録があるかをチェックする
+        	sql = 'SELECT EXISTS (SELECT * FROM public.verify WHERE user_id = (SELECT id FROM public.user WHERE user_id={}))'.format(user_id)
+        	if DEBUG == True:
+        		print('SQL EXECUTE:{}'.format(sql))
+        	cursor.execute(sql)
+        	
+        	#すでに登録があった場合には以前送信されたURLの利用を促す
+        	if cursor.fetchone()[0] == True:
+        		send_message_with_line(user_id,['すでに登録されています。以前送信されたURLを利用してください。'])
+        	else:
+        		send_message_with_line(user_id,['データベースエラーです。管理者に問い合わせてください。'])
+        		
+        	cursor.close()
+        	conn.close()
 
     else:
         #正規のリクエストではないため200を返して終了
