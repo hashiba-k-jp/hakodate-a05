@@ -141,6 +141,8 @@ def getInfo():
     cursor.close()
     conn.close()
 
+    pp.pprint(userUrlAllWarning)
+
     # send "get information" url to each users
     for user_url in userUrlAllWarning:
         send_msg_with_line(
