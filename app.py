@@ -56,14 +56,17 @@ def control_console(id):
 def control_form():
     #送信データから値を抽出
     user_uuid = request.form.get('user_uuid')
-    user_accept = request.form.get('accept')
+    user_accept = request.form.get('user_resistration_accept_checkbox')
 
     #DBのコネクションを作成
     conn = db_connect()
     cursor = conn.cursor()
+    
+    print('user_uuid:{}'.format(user_uuid))
+    print('user_accept:{}'.format(user_accept))
 
     #user_accept==onの時ユーザーを登録
-    if user_accept == 'on':
+    if user_accept == '1':
         #DBからuserのidを取得
         sql = "SELECT user_id FROM public.verify WHERE id='{}';".format(user_uuid)
         if DEBUG == True:
