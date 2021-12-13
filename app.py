@@ -41,16 +41,16 @@ def control_console(id):
     if DEBUG == True:
         print('SQL EXECUTE:{}'.format(sql))
     cursor.execute(sql)
-    result = cursor.fetchone()
+    result = cursor.fetchone()[0]
     conn.commit()
 
     #データベース上に存在しない場合正規のリクエストではないため500を返す
-    if result[0] == False:
+    if result == False:
         cursor.close()
         conn.close()
         return '',500,{}
     else:
-        return render_template("control.html",title="登録",id=id)
+        return render_template("control.html",title="避難所経路探索|登録",id=id)
 
 @app.route('/control/form', methods=['POST'])
 def control_form():
@@ -61,9 +61,6 @@ def control_form():
     #DBのコネクションを作成
     conn = db_connect()
     cursor = conn.cursor()
-    
-    print('user_uuid:{}'.format(user_uuid))
-    print('user_accept:{}'.format(user_accept))
 
     #user_accept==onの時ユーザーを登録
     if user_accept == '1':
@@ -83,32 +80,85 @@ def control_form():
         area_id = cursor.fetchone()[0]
         conn.commit()
 
-        #resistrationに登録
-        sql = "INSERT INTO public.resistration(user_id,area_id) VALUES('{user_id}','{area_id}');".format(
-            user_id = user_id,
-            area_id = area_id
-        )
+        #resistrationにすでに登録されているかを確認
+        sql = 'SELECT EXISTS (SELECT * FROM public.resistration WHERE user_id={user_id} AND area_id={area_id});'.format(user_id=user_id,area_id=area_id)
         if DEBUG == True:
             print('SQL EXECUTE:{}'.format(sql))
         cursor.execute(sql)
+        resistration_result = cursor.fetchone()[0]
         conn.commit()
+            
+        if resistration_result == True:
+            cursor.close()
+            conn.close()
+            
+            return render_template(
+                'resistration_result.html',
+                title='避難所経路探索|登録結果',
+                result='すでに登録されています',
+                result_text='登録した心当たりがない場合は管理者にお問い合わせください'
+            )
+        else:
+            #resistrationに登録
+            sql = "INSERT INTO public.resistration(user_id,area_id) VALUES('{user_id}','{area_id}');".format(
+                user_id = user_id,
+                area_id = area_id
+            )
+            if DEBUG == True:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            conn.commit()
 
-        #verifyからユーザーを削除
-        sql = "DELETE FROM public.verify WHERE id = '{}';".format(user_uuid)
-        if DEBUG == True:
-            print('SQL EXECUTE:{}'.format(sql))
-        cursor.execute(sql)
-        conn.commit()
+            #verifyからユーザーを削除
+            sql = "DELETE FROM public.verify WHERE id = '{}';".format(user_uuid)
+            if DEBUG == True:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            conn.commit()
 
-        cursor.close()
-        conn.close()
+            cursor.close()
+            conn.close()
 
-        return '<p>登録完了!!</p>'
+            return render_template(
+                'resistration_result.html',
+                title='避難所経路探索|登録結果',
+                result='登録完了',
+                resulttext='登録が完了しました。このページを閉じてください'
+            )
     else:
+        #DBからユーザの情報を削除
+        
+        #userのidを取得
+        sql = "SELECT user_id FROM public.verify WHERE id='{}'".format(user_uuid)
+        if DEBUG == True:
+            print('SQL EXECUTE:{}'.format(sql))
+        cursor.execute(sql)
+        id = cursor.fetchone()[0]
+        conn.commit()
+        
+        #public.verifyからユーザ情報を削除
+        sql = 'DELETE FROM public.verify WHERE user_id={}'.format(id)
+        if DEBUG == True:
+            print('SQL EXECUTE:{}'.format(sql))
+        cursor.execute(sql)
+        conn.commit()
+        
+        #public.userからユーザ情報を削除
+        sql = 'DELETE FROM public.user WHERE id={}'.format(id)
+        if DEBUG == True:
+            print('SQL EXECUTE:{}'.format(sql))
+        cursor.execute(sql)
+        conn.commit()
+          
         cursor.close()
         conn.close()
 
-        return '',200,{}
+        return render_template(
+            'resistration_result.html',
+            title='避難所経路探索',
+            result='情報削除完了',
+            result_text='データベースからご利用者様の情報を削除しました。またのご利用をお待ちしています。'
+        )
 
 @app.route('/webhock', methods=['POST'])
 def webhock():
@@ -204,20 +254,20 @@ def webhock():
         
             
         except psycopg2.IntegrityError:
-        	#verifyにuer_idの登録があるかをチェックする
-        	sql = 'SELECT EXISTS (SELECT * FROM public.verify WHERE user_id = (SELECT id FROM public.user WHERE user_id={}))'.format(user_id)
-        	if DEBUG == True:
-        		print('SQL EXECUTE:{}'.format(sql))
-        	cursor.execute(sql)
-        	
-        	#すでに登録があった場合には以前送信されたURLの利用を促す
-        	if cursor.fetchone()[0] == True:
-        		send_message_with_line(user_id,['すでに登録されています。以前送信されたURLを利用してください。'])
-        	else:
-        		send_message_with_line(user_id,['データベースエラーです。管理者に問い合わせてください。'])
-        		
-        	cursor.close()
-        	conn.close()
+            #verifyにuer_idの登録があるかをチェックする
+            sql = 'SELECT EXISTS (SELECT * FROM public.verify WHERE user_id = (SELECT id FROM public.user WHERE user_id={}))'.format(user_id)
+            if DEBUG == True:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            
+            #すでに登録があった場合には以前送信されたURLの利用を促す
+            if cursor.fetchone()[0] == True:
+                send_message_with_line(user_id,['すでに登録されています。以前送信されたURLを利用してください。'])
+            else:
+                send_message_with_line(user_id,['データベースエラーです。管理者に問い合わせてください。'])
+                
+            cursor.close()
+            conn.close()
 
     else:
         #正規のリクエストではないため200を返して終了
