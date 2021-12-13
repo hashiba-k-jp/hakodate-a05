@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-from src.findNearestEvacuation.test import test_app
 from src.findNearestEvacuation.find_evacuation_point import find_evacuation_point
 # from src.getInfoFromJMA.getInfo import getInfo, Entry
 from src.getInfoFromJMA.initData import initData
@@ -88,11 +87,11 @@ def control_form():
             cursor.execute(sql)
             resistration_result = cursor.fetchone()[0]
             conn.commit()
-                
+
             if resistration_result == True:
                 cursor.close()
                 conn.close()
-                
+
                 return render_template(
                     'resistration_result.html',
                     title='避難所経路探索|登録結果',
@@ -128,7 +127,7 @@ def control_form():
                 )
         else:
             #DBからユーザの情報を削除
-            
+
             #userのidを取得
             sql = "SELECT user_id FROM public.verify WHERE id='{}'".format(user_uuid)
             if DEBUG == True:
@@ -136,14 +135,14 @@ def control_form():
             cursor.execute(sql)
             id = cursor.fetchone()[0]
             conn.commit()
-            
+
             #public.userからユーザ情報を削除
             sql = 'DELETE FROM public.user WHERE id={}'.format(id)
             if DEBUG == True:
                 print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             conn.commit()
-              
+
             cursor.close()
             conn.close()
 
@@ -155,15 +154,15 @@ def control_form():
             )
     except psycopg2.IntegrityError:
         print('SQL RERATION ERROR!!')
-        
+
         return render_template(
             'resistration_result.html',
             title='避難所経路探索|登録結果',
             result='内部エラー',
             result_text='システム内部でエラーが発生しました。もう一度登録を試みてください。'
         )
-        
-        
+
+
 @app.route('/webhock', methods=['POST'])
 def webhock():
 
@@ -178,7 +177,7 @@ def webhock():
     if validation(body=body, signature=signature.encode('utf-8')) == True: #イベントの真贋判定
         if DEBUG == True:
             print('This is regular request!!')
-        
+
         for line in data["events"]:
             user_id=''
             #ソースがユーザからのイベントである場合のみuser_idを抽出
@@ -224,13 +223,13 @@ def webhock():
                     cursor.execute(sql)
                     id = cursor.fetchone()[0]
                     conn.commit()
-                    
+
                     #public.verifyにユーザーの情報が存在する場合は削除する
                     sql ="SELECT EXISTS (SELECT * FROM public.verify WHERE user_id={});".format(id)
                     if DEBUG == True:
                         print('SQL EXECUTE:{}'.format(sql))
                     cursor.execute(sql)
-                    
+
                     if cursor.fetchone()[0] == True:
                         sql = "DELETE FROM public.verify WHERE user_id={}".format(id)
 
@@ -240,7 +239,7 @@ def webhock():
                         conn.commit()
                     else:
                         conn.commit()
-                         
+
                     #DBにUUIDとverify_hash,userのidを記録
                     sql = "INSERT INTO public.verify(id,user_id) VALUES ('{uuid}',{user_id});".format(
                         uuid=user_uuid,
@@ -263,7 +262,7 @@ def webhock():
                     #DBとの接続を解除
                     cursor.close()
                     conn.close()
-            
+
             #messageではない時200を返して処理を終了
             else:
                 return 'internal server error',200,{}
@@ -291,7 +290,6 @@ def get_location_post():
     # GPS = {'N':<lat>, 'E':<lng>}
     # userID = <userID>
     # isTest = False
-    test_app()
     notiData = find_evacuation_point(
         currentAddress=None,
         hazardType=warningCode,
@@ -312,8 +310,7 @@ def get_location_post():
             msgs=notiData['url'],
         )
         '''
-
-        return "completed!"
+        return notiData["EvacuationPoint"]
 
 #LINEユーザにメッセージを送信する関数
 def send_msg_with_line(user_id,msgs):
@@ -361,7 +358,7 @@ def db_connect():
     conn = ''
     try:
         conn = psycopg2.connect(connection_info)
-    except psycopg2.Error: 
+    except psycopg2.Error:
         print('Database connection failed!!') #DBとの接続に失敗した場合は終了する
         sys.exit()
 
