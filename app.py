@@ -25,8 +25,6 @@ app = Flask(__name__)
 
 #各種定数を定義
 DEBUG = os.environ.get('IS_DEBUG') == 'True' #デバッグ用のフラグ
-CHANNEL_SECRET  = os.environ.get('CHANNEL_SECRET')
-ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
 ROOT_URL = os.environ.get('ROOT_URL')
 CONSOLE_ROOT_URL = '{ROOT_URL}/control'.format(
     ROOT_URL=ROOT_URL
@@ -242,14 +240,14 @@ def webhock():
             
             #messageではない時200を返して処理を終了
             else:
-                return 'internal server error',200,{}
+                return '',200,{}
 
             #全ての処理が正常終了した時200を返す
             return '',200,{}
 
     else:
         #正規のリクエストではないため200を返して終了
-        return 'internal server error',400,{}
+        return 'Bad Request',400,{}
 
 @app.route('/location', methods=['GET'])
 def get_location_get():
