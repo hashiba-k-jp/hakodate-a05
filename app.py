@@ -25,6 +25,7 @@ app = Flask(__name__)
 
 #各種定数を定義
 DEBUG = os.environ.get('IS_DEBUG') == 'True' #デバッグ用のフラグ
+CHANNEL_SECRET = os.environ.get('CHANNEL_SECRET')
 ROOT_URL = os.environ.get('ROOT_URL')
 CONSOLE_ROOT_URL = '{ROOT_URL}/control'.format(
     ROOT_URL=ROOT_URL
@@ -38,8 +39,6 @@ def control_console(id):
 
     #DB上にidが存在するかを確認
     sql = "SELECT EXISTS (SELECT * FROM public.verify WHERE id='{}');".format(id)
-    if DEBUG == True:
-        print('SQL EXECUTE:{}'.format(sql))
     cursor.execute(sql)
     result = cursor.fetchone()[0]
     conn.commit()
@@ -50,6 +49,8 @@ def control_console(id):
         conn.close()
         return '',500,{}
     else:
+        cursor.close()
+        conn.close()
         return render_template("control.html",title="避難所経路探索|登録",id=id)
 
 @app.route('/control/form', methods=['POST'])
