@@ -175,7 +175,7 @@ def webhock():
                         verify_hash = hashlib.sha256(verify_code.encode()).hexdigest()
 
                         #DBにUUIDとverify_hash,userのidを記録
-                        sql = "INSERT INTO public.verify(id,pass,user_id) VALUES ('{uuid}','{verify_pass}',{user_id});".format(
+                        sql = "INSERT INTO public.verify(id,user_id) VALUES ('{uuid}',{user_id});".format(
                             uuid=user_uuid,
                             verify_pass=verify_hash,
                             user_id=id[0]
