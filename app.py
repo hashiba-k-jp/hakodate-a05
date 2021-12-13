@@ -233,6 +233,7 @@ def webhock():
                     
                     if cursor.fetchone()[0] == True:
                         sql = "DELETE FROM public.verify WHERE user_id={}".format(id)
+
                         if DEBUG == True:
                             print('SQL EXECUTE:{}'.format(sql))
                         cursor.execute(sql)
