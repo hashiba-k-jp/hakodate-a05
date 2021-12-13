@@ -21,8 +21,13 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
     except ModuleNotFoundError:
         ### print('ModuleNotFoundError')
         ### print('The APIKEY.py does NOT exist on same directry.')
-        return 'failed : API KEY dose not exist!'
-        exit()
+        returnData = {
+            'ErrorCode': 'Google API KEY not found',
+        }
+
+        return returnData
+        ### return 'failed : API KEY dose not exist!'
+        ### exit()
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [2.A] get latitude(N) and longitude(E) of current address
@@ -135,7 +140,8 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
     ### print('-='*25)
     returnData = {
         'userID': userID,
-        'url': url
+        'url': url,
+        'ErrorCode': None
     }
 
     return returnData

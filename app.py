@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from src.findNearestEvacuation.test import test_app
 from src.findNearestEvacuation.find_evacuation_point import find_evacuation_point
 # from src.getInfoFromJMA.getInfo import getInfo, Entry
@@ -38,13 +38,16 @@ def get_location_post():
         userID=userID
     )
     pp.pprint(notiData)
-    '''
-    send_msg_with_line(
-        user_id=notiData['userID'],
-        msgs=notiData['url'],
-    )
-    '''
-    return "completed!"
+    if not(notiData['ErrorCode'] is None):
+        return jsonify({'message': notiData['ErrorCode']}), 500
+    else:
+        '''
+        send_msg_with_line(
+            user_id=notiData['userID'],
+            msgs=notiData['url'],
+        )
+        '''
+        return "completed!"
 
 if __name__ == "__main__":
     initApp()
