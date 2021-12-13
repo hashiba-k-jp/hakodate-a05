@@ -18,7 +18,7 @@ function load() {
 }
 window.onload = load;
 
-function getLocation() {
+function test() {
   navigator.geolocation.getCurrentPosition(success,fail);
 }
 
@@ -49,6 +49,7 @@ function success(pos){
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   request.send(data);
   window.alert('位置情報を送信しました。\nこのタブは閉じて下さい。')
+  document.getElementByClass('py-1').innerHTML = '<h1>送信しました。このタブは閉じてください。</h1>'
 }
 
 function fail(error){
