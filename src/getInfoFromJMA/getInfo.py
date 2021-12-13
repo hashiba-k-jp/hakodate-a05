@@ -128,7 +128,6 @@ def getInfo():
     userUrlAllWarning = []
     for d in data:
         # 与えられたcityCode(d['cityCode'])を持つユーザ(user_id)を全て抽出する
-        # 合ってる?
         sql = "SELECT user_id FROM public.user WHERE area_id = {};".format(int(d['cityCode']))
         if isTest:
             print('SQL EXECUTE:{}'.format(sql))
