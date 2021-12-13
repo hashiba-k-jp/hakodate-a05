@@ -18,7 +18,7 @@ function load() {
 }
 window.onload = load;
 
-function test() {
+function getLocation() {
   navigator.geolocation.getCurrentPosition(success,fail);
 }
 
@@ -62,6 +62,11 @@ function success(pos){
 }
 
 function fail(error){
+  if (error.code == 1){
+    document.getElementById('afterSend').innerHTML = '位置情報の取得を許可してください。';
+    document.getElementById('afterSend').classList.add = 'py-1';
+
+  }
   window.alert('位置情報の取得に失敗しました。エラーコード：' + error.code)
 }
 
