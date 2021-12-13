@@ -15,10 +15,10 @@
 <body>
     <div class="container">
         <div class="row">
-            <p class="fs-1">登録フォーム</p>
+            <p class="fs-1">避難所経路探索</p>
         </div>
         <div class="row">
-            <p class="text-start">現在の対応地域は下記のみです。登録する場合は同意にチェックをし認証コードを入力して、送信してください。</p>
+            <p class="text-start">現在の対応地域は下記のみです。登録する場合は同意にチェックをし認証コードを入力して、送信してください。また、登録を希望しない場合はチェックを付けずに送信してください。データベースからご利用者様の情報をすべて削除いたします。</p>
         </div>
         <div class="row">
             <div class="col-1"></div>
@@ -28,19 +28,11 @@
                 </ol>
             </div>
         </div>
-        <form>
+        <form action="/control/form" method="post">
             <input type="hidden" name="user_uuid" id="user_uuid" value={{ id }}>
             <div class="mb-3 formcheck">
                 <label for="user_resistration_accept_checkbox" class="form-check-label">登録する</label>
-                <input type="checkbox" class="form-check-input" id="user_resistration_accept_checkbox">
-            </div>
-            <div class="row">
-                <div class="col-auto">
-                    <label for="verify_code_input_box" class="col-form-label">認証コード</label>
-                </div>
-                <div class="col-auto">
-                    <input type="password" id="verify_code_input_box" class="form-control">
-                </div>
+                <input type="checkbox" class="form-check-input" name="user_resistration_accept_checkbox" value="1">
             </div>
             <br>
             <div class="row">

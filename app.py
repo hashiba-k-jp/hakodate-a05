@@ -41,72 +41,129 @@ def control_console(id):
     if DEBUG == True:
         print('SQL EXECUTE:{}'.format(sql))
     cursor.execute(sql)
-    result = cursor.fetchone()
+    result = cursor.fetchone()[0]
     conn.commit()
 
     #データベース上に存在しない場合正規のリクエストではないため500を返す
-    if result[0] == False:
+    if result == False:
         cursor.close()
         conn.close()
         return '',500,{}
     else:
-        return render_template("control.html",title="登録",id=id)
+        return render_template("control.html",title="避難所経路探索|登録",id=id)
 
 @app.route('/control/form', methods=['POST'])
 def control_form():
     #送信データから値を抽出
     user_uuid = request.form.get('user_uuid')
-    user_accept = request.form.get('accept')
+    user_accept = request.form.get('user_resistration_accept_checkbox')
 
-    #DBのコネクションを作成
-    conn = db_connect()
-    cursor = conn.cursor()
+    try:
+        #DBのコネクションを作成
+        conn = db_connect()
+        cursor = conn.cursor()
 
-    #user_accept==onの時ユーザーを登録
-    if user_accept == 'on':
-        #DBからuserのidを取得
-        sql = "SELECT user_id FROM public.verify WHERE id='{}';".format(user_uuid)
-        if DEBUG == True:
-            print('SQL EXECUTE:{}'.format(sql))
-        cursor.execute(sql)
-        user_id = cursor.fetchone()[0]
-        conn.commit()
+        #user_accept==onの時ユーザーを登録
+        if user_accept == '1':
+            #DBからuserのidを取得
+            sql = "SELECT user_id FROM public.verify WHERE id='{}';".format(user_uuid)
+            if DEBUG == True:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            user_id = cursor.fetchone()[0]
+            conn.commit()
 
-        #DBから函館の地域コードを取得
-        sql = "SELECT id FROM public.area WHERE area_name='函館市';"
-        if DEBUG == True:
-            print('SQL EXECUTE:{}'.format(sql))
-        cursor.execute(sql)
-        area_id = cursor.fetchone()[0]
-        conn.commit()
+            #DBから函館の地域コードを取得
+            sql = "SELECT id FROM public.area WHERE area_name='函館市';"
+            if DEBUG == True:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            area_id = cursor.fetchone()[0]
+            conn.commit()
 
-        #resistrationに登録
-        sql = "INSERT INTO public.resistration(user_id,area_id) VALUES('{user_id}','{area_id}');".format(
-            user_id = user_id,
-            area_id = area_id
+            #resistrationにすでに登録されているかを確認
+            sql = 'SELECT EXISTS (SELECT * FROM public.resistration WHERE user_id={user_id} AND area_id={area_id});'.format(user_id=user_id,area_id=area_id)
+            if DEBUG == True:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            resistration_result = cursor.fetchone()[0]
+            conn.commit()
+                
+            if resistration_result == True:
+                cursor.close()
+                conn.close()
+                
+                return render_template(
+                    'resistration_result.html',
+                    title='避難所経路探索|登録結果',
+                    result='すでに登録されています',
+                    result_text='登録した心当たりがない場合は管理者にお問い合わせください'
+                )
+            else:
+                #resistrationに登録
+                sql = "INSERT INTO public.resistration(user_id,area_id) VALUES('{user_id}','{area_id}');".format(
+                    user_id = user_id,
+                    area_id = area_id
+                )
+                if DEBUG == True:
+                    print('SQL EXECUTE:{}'.format(sql))
+                cursor.execute(sql)
+                conn.commit()
+
+                #verifyからユーザーを削除
+                sql = "DELETE FROM public.verify WHERE id = '{}';".format(user_uuid)
+                if DEBUG == True:
+                    print('SQL EXECUTE:{}'.format(sql))
+                cursor.execute(sql)
+                conn.commit()
+
+                cursor.close()
+                conn.close()
+
+                return render_template(
+                    'resistration_result.html',
+                    title='避難所経路探索|登録結果',
+                    result='登録完了',
+                    resulttext='登録が完了しました。このページを閉じてください'
+                )
+        else:
+            #DBからユーザの情報を削除
+            
+            #userのidを取得
+            sql = "SELECT user_id FROM public.verify WHERE id='{}'".format(user_uuid)
+            if DEBUG == True:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            id = cursor.fetchone()[0]
+            conn.commit()
+            
+            #public.userからユーザ情報を削除
+            sql = 'DELETE FROM public.user WHERE id={}'.format(id)
+            if DEBUG == True:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            conn.commit()
+              
+            cursor.close()
+            conn.close()
+
+            return render_template(
+                'resistration_result.html',
+                title='避難所経路探索|登録結果',
+                result='情報削除完了',
+                result_text='データベースからご利用者様の情報を削除しました。またのご利用をお待ちしています。'
+            )
+    except psycopg2.IntegrityError:
+        print('SQL RERATION ERROR!!')
+        
+        return render_template(
+            'resistration_result.html',
+            title='避難所経路探索|登録結果',
+            result='内部エラー',
+            result_text='システム内部でエラーが発生しました。もう一度登録を試みてください。'
         )
-        if DEBUG == True:
-            print('SQL EXECUTE:{}'.format(sql))
-        cursor.execute(sql)
-        conn.commit()
-
-        #verifyからユーザーを削除
-        sql = "DELETE FROM public.verify WHERE id = '{}';".format(user_uuid)
-        if DEBUG == True:
-            print('SQL EXECUTE:{}'.format(sql))
-        cursor.execute(sql)
-        conn.commit()
-
-        cursor.close()
-        conn.close()
-
-        return '<p>登録完了!!</p>'
-    else:
-        cursor.close()
-        conn.close()
-
-        return '',200,{}
-
+        
+        
 @app.route('/webhock', methods=['POST'])
 def webhock():
 
@@ -121,97 +178,97 @@ def webhock():
     if validation(body=body, signature=signature.encode('utf-8')) == True: #イベントの真贋判定
         if DEBUG == True:
             print('This is regular request!!')
-        try:
-            for line in data["events"]:
-                user_id=''
-                #ソースがユーザからのイベントである場合のみuser_idを抽出
-                if line['source']['type'] == 'user':
-                    user_id = line["source"]['userId']
-                    if DEBUG == True:
-                        print('user_id:{}'.format(user_id))
-                else:
-                    #ソースがユーザーからのイベントではない時400を返して処理を終える
-                    return '',200,{}
+        
+        for line in data["events"]:
+            user_id=''
+            #ソースがユーザからのイベントである場合のみuser_idを抽出
+            if line['source']['type'] == 'user':
+                user_id = line["source"]['userId']
+                if DEBUG == True:
+                    print('user_id:{}'.format(user_id))
+            else:
+                #ソースがユーザーからのイベントではない時400を返して処理を終える
+                return '',200,{}
 
-                #DB操作用のカーソルを作成
-                cursor = conn.cursor()
+            #DB操作用のカーソルを作成
+            cursor = conn.cursor()
 
-                #user_idが既にDB上に存在しているか確認する
-                sql = "SELECT EXISTS (SELECT * FROM public.user WHERE user_id='{}');".format(user_id)
+            #user_idが既にDB上に存在しているか確認する
+            sql = "SELECT EXISTS (SELECT * FROM public.user WHERE user_id='{}');".format(user_id)
+            if DEBUG == True:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            conn.commit()
+
+            result = cursor.fetchone()
+            print('Result:{}'.format(result))
+
+            #存在しない時DBに登録
+            if result[0] == False:
+                sql = "INSERT INTO public.user(user_id) VALUES('{}');".format(user_id)
                 if DEBUG == True:
                     print('SQL EXECUTE:{}'.format(sql))
                 cursor.execute(sql)
                 conn.commit()
 
-                result = cursor.fetchone()
-                print('Result:{}'.format(result))
+            #イベントがmessageである時送信されたテキストの解析
+            if line['type'] == 'message':
+                if line['message']['text'] == '登録' or line['message']['text'] == '初期設定':
+                    #URL用のUUIDの生成
+                    user_uuid = uuid.uuid4()
 
-                #存在しない時DBに登録
-                if result[0] == False:
-                    sql = "INSERT INTO public.user(user_id) VALUES('{}');".format(user_id)
+                    #DBからuserのidを取得
+                    sql = "SELECT id FROM public.user WHERE user_id='{}'".format(user_id)
+                    if DEBUG == True:
+                        print('EXECUTE SQL:{}'.format(sql))
+                    cursor.execute(sql)
+                    id = cursor.fetchone()[0]
+                    conn.commit()
+                    
+                    #public.verifyにユーザーの情報が存在する場合は削除する
+                    sql ="SELECT EXISTS (SELECT * FROM public.verify WHERE user_id={});".format(id)
+                    if DEBUG == True:
+                        print('SQL EXECUTE:{}'.format(sql))
+                    cursor.execute(sql)
+                    
+                    if cursor.fetchone()[0] == True:
+                        sql = "DELETE FROM public.verify WHERE user_id={}".format(id)
+                        if DEBUG == True:
+                            print('SQL EXECUTE:{}'.format(sql))
+                        cursor.execute(sql)
+                        conn.commit()
+                    else:
+                        conn.commit()
+                         
+                    #DBにUUIDとverify_hash,userのidを記録
+                    sql = "INSERT INTO public.verify(id,user_id) VALUES ('{uuid}',{user_id});".format(
+                        uuid=user_uuid,
+                        user_id=id
+                    )
                     if DEBUG == True:
                         print('SQL EXECUTE:{}'.format(sql))
                     cursor.execute(sql)
                     conn.commit()
 
-                #イベントがmessageである時送信されたテキストの解析
-                if line['type'] == 'message':
-                    if line['message']['text'] == '登録' or line['message']['text'] == '初期設定':
-                        #URL用のUUIDの生成
-                        user_uuid = uuid.uuid4()
+                    #ユーザにURLと認証コードを送信
 
-                        #DBからuserのidを取得
-                        sql = "SELECT id FROM public.user WHERE user_id='{}'".format(user_id)
-                        if DEBUG == True:
-                            print('EXECUTE SQL:{}'.format(sql))
-                        cursor.execute(sql)
-                        id = cursor.fetchone()
-                        conn.commit()
+                    #URLを送信
+                    url_msg = '管理用コンソール用URL\n{root_url}/{uuid}'.format(
+                        root_url=CONSOLE_ROOT_URL,
+                        uuid=user_uuid
+                    )
+                    send_msg_with_line(user_id=user_id, msgs=[url_msg])
 
-                        #認証用のコード(6桁)を作成
-                        verify_code = secrets.randbelow(999999)
-                        verify_code = str(verify_code).zfill(6) #6桁になるように0埋め
-                        #認証用のコードをハッシュ化
-                        verify_hash = hashlib.sha256(verify_code.encode()).hexdigest()
+                    #DBとの接続を解除
+                    cursor.close()
+                    conn.close()
+            
+            #messageではない時200を返して処理を終了
+            else:
+                return 'internal server error',200,{}
 
-                        #DBにUUIDとverify_hash,userのidを記録
-                        sql = "INSERT INTO public.verify(id,pass,user_id) VALUES ('{uuid}','{verify_pass}',{user_id});".format(
-                            uuid=user_uuid,
-                            verify_pass=verify_hash,
-                            user_id=id[0]
-                        )
-                        if DEBUG == True:
-                            print('SQL EXECUTE:{}'.format(sql))
-                        cursor.execute(sql)
-                        conn.commit()
-
-                        #ユーザにURLと認証コードを送信
-
-                        #URLを送信
-                        url_msg = '管理用コンソール用URL\n{root_url}/{uuid}'.format(
-                            root_url=CONSOLE_ROOT_URL,
-                            uuid=user_uuid
-                        )
-                        verify_code_msg = '確認コードは{}です。webページに戻り入力してください'.format(
-                            str(verify_code)
-                        )
-                        send_msg_with_line(user_id=user_id, msgs=[url_msg,verify_code_msg])
-
-                        #DBとの接続を解除
-                        cursor.close()
-                        conn.close()
-                
-                #messageではない時200を返して処理を終了
-                else:
-                    return 'internal server error',200,{}
-
-                #全ての処理が正常終了した時200を返す
-                return '',200,{}
-
-        except psycopg2.Error as e:
-            print('DBへの書き込みエラー')
-            print(e.pgerror)
-            conn.close()
+            #全ての処理が正常終了した時200を返す
+            return '',200,{}
 
     else:
         #正規のリクエストではないため200を返して終了
