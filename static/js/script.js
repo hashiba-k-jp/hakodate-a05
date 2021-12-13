@@ -18,7 +18,7 @@ function load() {
 }
 window.onload = load;
 
-function getLocation() {
+function test() {
   navigator.geolocation.getCurrentPosition(success,fail);
 }
 
