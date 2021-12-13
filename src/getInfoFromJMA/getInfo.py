@@ -7,6 +7,9 @@ import requests
 from bs4 import BeautifulSoup as bs
 import pprint as pp
 import json
+import sys
+sys.path.append('.')
+from funcs import send_msg_with_line, db_connect
 
 def getInfo():
     print('CALLED \'src/getInfoFromJMA/getInfo.py\'')
@@ -119,12 +122,38 @@ def getInfo():
             'warningCode': '03',
         })
 
-    pp.pprint(data)
+    # connect to database
+    conn = db_connect()
+    cursor = conn.cursor()
+    userUrlAllWarning = []
+    for d in data:
+        # 与えられたcityCode(d['cityCode'])を持つユーザ(user_id)を全て抽出する
+        # 合ってる?
+        sql = "SELECT user_id FROM public.user WHERE area_id = '{}';".format(int(d['cityCode']))
+        if isTest:
+            print('SQL EXECUTE:{}'.format(sql))
+        cursor.execute(sql)
+        user_ids = cursor.fetchall()
+        userUrl = [{'userid':userid, 'warningCode':d['warningCode']} for userid in user_ids]
+        userUrlAllWarning += userUrl
+
+    # disconnect to database
+    cursor.close()
+    conn.close()
+
+    # send "get information" url to each users
+    for user_url in userUrlAllWarning:
+        send_msg_with_line(
+            user_id=user_url['userid'],
+            # -=-=-=-=-=- MUST BE CHANGED WHEN RUN THIS PROGRAM -=-=-=-=-=-
+            msgs="localhost:5001/location?userID={}&warningCode={}".format(user_url['userid'], user_url['warningCode'])
+            #     ^~~~~~~~~~~~~~
+        )
+
+    ### pp.pprint(data)
     with open('src/getInfoFromJMA/data/disasterList.json', 'w') as f:
         json.dump(data, f, ensure_ascii=True, indent=4, sort_keys=True, separators=(',', ': '))
 
-    if isTest:
-        pass
     # record the last information
     lastInfoOut = {
         'Warning': infoSetW[0]['url'],
@@ -142,7 +171,6 @@ class Entry:
         self.author = author
         self.time = time
         self.data = []
-
         # USE  03 大雨警報
         # USE  04 洪水警報
         # USE  05 暴風警報
@@ -152,15 +180,15 @@ class Entry:
         # USE  35 暴風特別警報
         # USE  38 高潮特別警報
         # USE  50 地震 (勝手に定義した番号であって気象庁公式のものではないことに留意)
+        # USE  70 土砂災害 (同様に勝手に定義)
         '''
         "windAndFloodDamage" 03, 04, 05, 33, 35, 20(TEST)
         "earthquakeHazard"   50
         "tsunamiHazard"      None
         "volcanicHazard"     None
         "highTideHazard"     08, 38
-        "landslideDisaster"  None
+        "landslideDisaster"  70
         '''
-
 
     def details(self):
         res = requests.get(self.url)
@@ -190,15 +218,14 @@ class Entry:
                             'cityCode': cCode,
                             'warningCode': '70'
                         })
-                        # '70': 'landslideDisaster' (勝手に定義)
         elif self.type == 'Earthquake':
-            # Earthquake (Intensity: 1≤ )
+            # Earthquake (Intensity: 5+≤ )
             if self.title == '震源・震度に関する情報':
                 code = [i.text for i in Bs4.select('Body > Intensity > Observation > Pref > Area > City > Code')]
                 int = [i.text for i in Bs4.select('Body > Intensity > Observation > Pref > Area > City > MaxInt')]
                 data = []
                 for code, int in zip(code, int):
-                    if int in ['4', '5-', '5+', '6-', '6+', '7']:
+                    if int in ['5+', '6-', '6+', '7']:
                         self.data.append({
                             'cityCode': code,
                             'warningCode': '50'
