@@ -47,6 +47,7 @@ def get_location_post():
             msgs=notiData['url'],
         )
         '''
+
         return "completed!"
 
 if __name__ == "__main__":

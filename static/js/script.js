@@ -41,9 +41,10 @@ function success(pos){
         // 失敗
         console.log(request.status);
         console.log('bad!')
-        window.alert('送信失敗。')
         document.getElementById('sendButton').textContent = '現在地情報を送信';
         document.getElementById('sendButton').disabled = false;
+        document.getElementById('afterSend').innerHTML = '送信に失敗しました。<br>再送信してください。';
+        document.getElementById('afterSend').classList.add = 'py-1';
       } else {
         // 送信成功
         console.log('good!')
