@@ -107,6 +107,7 @@ def getInfo():
             data += entry.data
 
     else:
+        data = []
         data.append({
             'cityCode': '0120200',
             'warningCode': '03',
