@@ -18,12 +18,13 @@ from linebot import(
 )
 import linebot
 
+from funcs import *
+
 app = Flask(__name__)
 
 #各種定数を定義
 DEBUG = os.environ.get('IS_DEBUG') == 'True' #デバッグ用のフラグ
 CHANNEL_SECRET  = os.environ.get('CHANNEL_SECRET')
-ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
 ROOT_URL = os.environ.get('ROOT_URL')
 CONSOLE_ROOT_URL = '{ROOT_URL}/control'.format(
     ROOT_URL=ROOT_URL
@@ -37,8 +38,6 @@ def control_console(id):
 
     #DB上にidが存在するかを確認
     sql = "SELECT EXISTS (SELECT * FROM public.verify WHERE id='{}');".format(id)
-    if DEBUG == True:
-        print('SQL EXECUTE:{}'.format(sql))
     cursor.execute(sql)
     result = cursor.fetchone()[0]
     conn.commit()
@@ -49,6 +48,8 @@ def control_console(id):
         conn.close()
         return '',500,{}
     else:
+        cursor.close()
+        conn.close()
         return render_template("control.html",title="避難所経路探索|登録",id=id)
 
 @app.route('/control/form', methods=['POST'])
@@ -66,24 +67,18 @@ def control_form():
         if user_accept == '1':
             #DBからuserのidを取得
             sql = "SELECT user_id FROM public.verify WHERE id='{}';".format(user_uuid)
-            if DEBUG == True:
-                print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             user_id = cursor.fetchone()[0]
             conn.commit()
 
             #DBから函館の地域コードを取得
             sql = "SELECT id FROM public.area WHERE area_name='函館市';"
-            if DEBUG == True:
-                print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             area_id = cursor.fetchone()[0]
             conn.commit()
 
             #resistrationにすでに登録されているかを確認
             sql = 'SELECT EXISTS (SELECT * FROM public.resistration WHERE user_id={user_id} AND area_id={area_id});'.format(user_id=user_id,area_id=area_id)
-            if DEBUG == True:
-                print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             resistration_result = cursor.fetchone()[0]
             conn.commit()
@@ -104,15 +99,11 @@ def control_form():
                     user_id = user_id,
                     area_id = area_id
                 )
-                if DEBUG == True:
-                    print('SQL EXECUTE:{}'.format(sql))
                 cursor.execute(sql)
                 conn.commit()
 
                 #verifyからユーザーを削除
                 sql = "DELETE FROM public.verify WHERE id = '{}';".format(user_uuid)
-                if DEBUG == True:
-                    print('SQL EXECUTE:{}'.format(sql))
                 cursor.execute(sql)
                 conn.commit()
 
@@ -130,16 +121,12 @@ def control_form():
 
             #userのidを取得
             sql = "SELECT user_id FROM public.verify WHERE id='{}'".format(user_uuid)
-            if DEBUG == True:
-                print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             id = cursor.fetchone()[0]
             conn.commit()
 
             #public.userからユーザ情報を削除
             sql = 'DELETE FROM public.user WHERE id={}'.format(id)
-            if DEBUG == True:
-                print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             conn.commit()
 
@@ -183,8 +170,6 @@ def webhock():
             #ソースがユーザからのイベントである場合のみuser_idを抽出
             if line['source']['type'] == 'user':
                 user_id = line["source"]['userId']
-                if DEBUG == True:
-                    print('user_id:{}'.format(user_id))
             else:
                 #ソースがユーザーからのイベントではない時400を返して処理を終える
                 return '',200,{}
@@ -205,8 +190,6 @@ def webhock():
             #存在しない時DBに登録
             if result[0] == False:
                 sql = "INSERT INTO public.user(user_id) VALUES('{}');".format(user_id)
-                if DEBUG == True:
-                    print('SQL EXECUTE:{}'.format(sql))
                 cursor.execute(sql)
                 conn.commit()
 
@@ -218,23 +201,17 @@ def webhock():
 
                     #DBからuserのidを取得
                     sql = "SELECT id FROM public.user WHERE user_id='{}'".format(user_id)
-                    if DEBUG == True:
-                        print('EXECUTE SQL:{}'.format(sql))
                     cursor.execute(sql)
                     id = cursor.fetchone()[0]
                     conn.commit()
 
                     #public.verifyにユーザーの情報が存在する場合は削除する
                     sql ="SELECT EXISTS (SELECT * FROM public.verify WHERE user_id={});".format(id)
-                    if DEBUG == True:
-                        print('SQL EXECUTE:{}'.format(sql))
                     cursor.execute(sql)
 
                     if cursor.fetchone()[0] == True:
                         sql = "DELETE FROM public.verify WHERE user_id={}".format(id)
 
-                        if DEBUG == True:
-                            print('SQL EXECUTE:{}'.format(sql))
                         cursor.execute(sql)
                         conn.commit()
                     else:
@@ -253,7 +230,7 @@ def webhock():
                     #ユーザにURLと認証コードを送信
 
                     #URLを送信
-                    url_msg = '管理用コンソール用URL\n{root_url}/{uuid}'.format(
+                    url_msg = '管理用コンソール用URL\nhttps://{root_url}/{uuid}'.format(
                         root_url=CONSOLE_ROOT_URL,
                         uuid=user_uuid
                     )
@@ -265,14 +242,14 @@ def webhock():
 
             #messageではない時200を返して処理を終了
             else:
-                return 'internal server error',200,{}
+                return '',200,{}
 
             #全ての処理が正常終了した時200を返す
             return '',200,{}
 
     else:
         #正規のリクエストではないため200を返して終了
-        return 'internal server error',400,{}
+        return 'Bad Request',400,{}
 
 @app.route('/location', methods=['GET'])
 def get_location_get():
@@ -312,25 +289,6 @@ def get_location_post():
         '''
         return notiData["EvacuationPoint"]
 
-#LINEユーザにメッセージを送信する関数
-def send_msg_with_line(user_id,msgs):
-    send_msg = TextSendMessage(text='')
-    try:
-        line_bot_api = LineBotApi(ACCESS_TOKEN)
-
-        for msg in msgs:
-            if DEBUG == True:
-                print('SENDING MESSAGE:{}'.format(msg))
-            send_msg = TextSendMessage(text=msg)
-            line_bot_api.push_message(user_id,send_msg)
-    except linebot.exceptions.LineBotApiError as e:
-        print(e.error.message)
-        print(e.error.details)
-
-    for msg in msgs:
-        if DEBUG == True:
-            print('SENNDING MESSAGE:{}'.format(msg))
-
 #署名検証用の関数
 def validation(body,signature):
     hash = hmac.new(CHANNEL_SECRET.encode('utf-8'),
@@ -363,7 +321,6 @@ def db_connect():
         sys.exit()
 
     return conn
-
 if __name__ == "__main__":
     initApp()
     initData()

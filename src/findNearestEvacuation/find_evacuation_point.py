@@ -10,7 +10,7 @@ import requests
 import json
 import numpy as np
 import pprint as pp
-import sys
+import sys,os
 
 def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isTest=False, GPS=None, userID=None):
 

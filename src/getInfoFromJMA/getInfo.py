@@ -7,9 +7,11 @@ import requests
 from bs4 import BeautifulSoup as bs
 import pprint as pp
 import json
-import sys
+import sys,os
 sys.path.append('.')
 from funcs import send_msg_with_line, db_connect
+
+
 
 def getInfo():
     print('CALLED \'src/getInfoFromJMA/getInfo.py\'')
@@ -117,12 +119,12 @@ def getInfo():
     userUrlAllWarning = []
     for d in data:
         # 与えられたcityCode(d['cityCode'])を持つユーザ(user_id)を全て抽出する
-        # 合ってる?
-        sql = "SELECT user_id FROM public.user WHERE area_id = {};".format(int(d['cityCode']))
+        sql = "SELECT user_id FROM public.resistration WHERE area_id = {};".format(d['cityCode'])
         if isTest:
             print('SQL EXECUTE:{}'.format(sql))
         cursor.execute(sql)
         user_ids = cursor.fetchall()
+        conn.commit()
         userUrl = [{'userid':userid, 'warningCode':d['warningCode']} for userid in user_ids]
         userUrlAllWarning += userUrl
 
@@ -137,7 +139,7 @@ def getInfo():
         send_msg_with_line(
             user_id=user_url['userid'],
             # -=-=-=-=-=- MUST BE CHANGED WHEN RUN THIS PROGRAM -=-=-=-=-=-
-            msgs="localhost:5001/location?userID={}&warningCode={}".format(user_url['userid'], user_url['warningCode'])
+            msgs="https://{}/location?userID={}&warningCode={}".format(os.environ.get('ROOT_URL'),user_url['userid'], user_url['warningCode'])
             #     ^~~~~~~~~~~~~~
         )
 
