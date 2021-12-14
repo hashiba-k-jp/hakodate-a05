@@ -24,7 +24,7 @@ from funcs import *
 app = Flask(__name__)
 
 #各種定数を定義
-DEBUG = os.environ.get('IS_DEBUG') == 'True' #デバッグ用のフラグ
+#DEBUG = os.environ.get('IS_DEBUG') == 'True' #デバッグ用のフラグ
 CHANNEL_SECRET  = os.environ.get('CHANNEL_SECRET')
 ROOT_URL = os.environ.get('ROOT_URL')
 CONSOLE_ROOT_URL = '{ROOT_URL}/control'.format(
@@ -160,95 +160,95 @@ def webhock():
 
     signature = request.headers.get('x-line-signature')
 
-    conn = db_connect()
+    try:
+        conn = db_connect()
 
-    if validation(body=body, signature=signature.encode('utf-8')) == True: #イベントの真贋判定
-        
-        for line in data["events"]:
-            user_id=''
-            #ソースがユーザからのイベントである場合のみuser_idを抽出
-            if line['source']['type'] == 'user':
-                user_id = line["source"]['userId']
-            else:
-                #ソースがユーザーからのイベントではない時400を返して処理を終える
-                return '',200,{}
+        if validation(body=body, signature=signature.encode('utf-8')) == True: #イベントの真贋判定
+            
+            for line in data["events"]:
+                user_id=''
+                #ソースがユーザからのイベントである場合のみuser_idを抽出
+                if line['source']['type'] == 'user':
+                    user_id = line["source"]['userId']
+                else:
+                    #ソースがユーザーからのイベントではない時400を返して処理を終える
+                    return '',200,{}
 
-            #DB操作用のカーソルを作成
-            cursor = conn.cursor()
+                #DB操作用のカーソルを作成
+                cursor = conn.cursor()
 
-            #user_idが既にDB上に存在しているか確認する
-            sql = "SELECT EXISTS (SELECT * FROM public.user WHERE user_id='{}');".format(user_id)
-            if DEBUG == True:
-                print('SQL EXECUTE:{}'.format(sql))
-            cursor.execute(sql)
-            conn.commit()
-
-            result = cursor.fetchone()
-            print('Result:{}'.format(result))
-
-            #存在しない時DBに登録
-            if result[0] == False:
-                sql = "INSERT INTO public.user(user_id) VALUES('{}');".format(user_id)
+                #user_idが既にDB上に存在しているか確認する
+                sql = "SELECT EXISTS (SELECT * FROM public.user WHERE user_id='{}');".format(user_id)
                 cursor.execute(sql)
                 conn.commit()
 
-            #イベントがmessageである時送信されたテキストの解析
-            if line['type'] == 'message':
-                if line['message']['text'] == '登録' or line['message']['text'] == '初期設定':
-                    #URL用のUUIDの生成
-                    user_uuid = uuid.uuid4()
+                result = cursor.fetchone()
+                print('Result:{}'.format(result))
 
-                    #DBからuserのidを取得
-                    sql = "SELECT id FROM public.user WHERE user_id='{}'".format(user_id)
+                #存在しない時DBに登録
+                if result[0] == False:
+                    sql = "INSERT INTO public.user(user_id) VALUES('{}');".format(user_id)
                     cursor.execute(sql)
-                    id = cursor.fetchone()[0]
                     conn.commit()
-                    
-                    #public.verifyにユーザーの情報が存在する場合は削除する
-                    sql ="SELECT EXISTS (SELECT * FROM public.verify WHERE user_id={});".format(id)
-                    cursor.execute(sql)
-                    
-                    if cursor.fetchone()[0] == True:
-                        sql = "DELETE FROM public.verify WHERE user_id={}".format(id)
 
+                #イベントがmessageである時送信されたテキストの解析
+                if line['type'] == 'message':
+                    if line['message']['text'] == '登録' or line['message']['text'] == '初期設定':
+                        #URL用のUUIDの生成
+                        user_uuid = uuid.uuid4()
+
+                        #DBからuserのidを取得
+                        sql = "SELECT id FROM public.user WHERE user_id='{}'".format(user_id)
+                        cursor.execute(sql)
+                        id = cursor.fetchone()[0]
+                        conn.commit()
+                        
+                        #public.verifyにユーザーの情報が存在する場合は削除する
+                        sql ="SELECT EXISTS (SELECT * FROM public.verify WHERE user_id={});".format(id)
+                        cursor.execute(sql)
+                        
+                        if cursor.fetchone()[0] == True:
+                            sql = "DELETE FROM public.verify WHERE user_id={}".format(id)
+
+                            cursor.execute(sql)
+                            conn.commit()
+                        else:
+                            conn.commit()
+                             
+                        #DBにUUIDとverify_hash,userのidを記録
+                        sql = "INSERT INTO public.verify(id,user_id) VALUES ('{uuid}',{user_id});".format(
+                            uuid=user_uuid,
+                            user_id=id
+                        )
                         cursor.execute(sql)
                         conn.commit()
-                    else:
-                        conn.commit()
-                         
-                    #DBにUUIDとverify_hash,userのidを記録
-                    sql = "INSERT INTO public.verify(id,user_id) VALUES ('{uuid}',{user_id});".format(
-                        uuid=user_uuid,
-                        user_id=id
-                    )
-                    if DEBUG == True:
-                        print('SQL EXECUTE:{}'.format(sql))
-                    cursor.execute(sql)
-                    conn.commit()
 
-                    #ユーザにURLと認証コードを送信
+                        #ユーザにURLと認証コードを送信
 
-                    #URLを送信
-                    url_msg = '管理用コンソール用URL\nhttps://{root_url}/{uuid}'.format(
-                        root_url=CONSOLE_ROOT_URL,
-                        uuid=user_uuid
-                    )
-                    send_msg_with_line(user_id=user_id, msgs=[url_msg])
+                        #URLを送信
+                        url_msg = '管理用コンソール用URL\nhttps://{root_url}/{uuid}'.format(
+                            root_url=CONSOLE_ROOT_URL,
+                            uuid=user_uuid
+                        )
+                        send_msg_with_line(user_id=user_id, msgs=[url_msg])
 
-                    #DBとの接続を解除
-                    cursor.close()
-                    conn.close()
-            
-            #messageではない時200を返して処理を終了
-            else:
+                        #DBとの接続を解除
+                        cursor.close()
+                        conn.close()
+                
+                #messageではない時200を返して処理を終了
+                else:
+                    return '',200,{}
+
+                #全ての処理が正常終了した時200を返す
                 return '',200,{}
 
-            #全ての処理が正常終了した時200を返す
-            return '',200,{}
-
-    else:
-        #正規のリクエストではないため200を返して終了
-        return 'Bad Request',400,{}
+        else:
+            #正規のリクエストではないため200を返して終了
+            return 'Bad Request',400,{}
+            
+    except:
+        return 200
 
 @app.route('/location', methods=['GET'])
 def get_location_get():
@@ -295,10 +295,6 @@ def validation(body,signature):
     hash = hmac.new(CHANNEL_SECRET.encode('utf-8'),
         body.encode('utf-8'), hashlib.sha256).digest()
     val_signature = base64.b64encode(hash)
-
-    #ローカルでバック用のバイパス
-    if DEBUG == True:
-        return True
 
     if val_signature == signature:
         return True
