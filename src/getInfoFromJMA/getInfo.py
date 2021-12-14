@@ -122,8 +122,8 @@ def getInfo():
         for d in data:
             # 与えられたcityCode(d['cityCode'])を持つユーザ(user_id)を全て抽出する
             # sql = "SELECT user_id FROM public.user WHERE id = ( SELECT user_id FROM public.resistration WHERE area_id = {});".format(d['cityCode'])
-            # sql = "SELECT user_id FROM public.resistration WHERE area_id = {};".format(d['cityCode'])
-            sql = "SELECT * FROM public.resistration"
+            sql = "SELECT user_id FROM public.resistration WHERE area_id = {};".format(d['cityCode'])
+            # sql = "SELECT * FROM public.resistration"
             if isTest:
                 print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
