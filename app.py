@@ -25,7 +25,7 @@ app = Flask(__name__)
 
 #各種定数を定義
 DEBUG = os.environ.get('IS_DEBUG') == 'True' #デバッグ用のフラグ
-CHANNEL_SECRET = os.environ.get('CHANNEL_SECRET')
+CHANNEL_SECRET  = os.environ.get('CHANNEL_SECRET')
 ROOT_URL = os.environ.get('ROOT_URL')
 CONSOLE_ROOT_URL = '{ROOT_URL}/control'.format(
     ROOT_URL=ROOT_URL

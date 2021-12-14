@@ -7,7 +7,6 @@ from linebot import(
     LineBotApi
 )
 import linebot
-
 #各種定数を環境変数から取得
 ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
 DATABASE_URL = os.environ.get('DATABASE_URL')
@@ -29,6 +28,8 @@ def send_msg_with_line(user_id,msgs):
 def db_connect():
 
     print('Connecting:DataBase')
+    #環境変数からデータベースの情報を取得
+    DATABASE_URL = os.environ.get('DATABASE_URL')
     conn = ''
     try:
         conn = psycopg2.connect(DATABASE_URL)
