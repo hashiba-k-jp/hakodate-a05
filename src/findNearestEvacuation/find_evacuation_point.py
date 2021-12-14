@@ -18,7 +18,7 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
     # [1] get API key
     try:
         from src.findNearestEvacuation.data.APIKEY import APIKEY
-        
+
     except ModuleNotFoundError:
         ### print('ModuleNotFoundError')
         ### print('The APIKEY.py does NOT exist on same directry.')
@@ -142,7 +142,8 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
     returnData = {
         'userID': userID,
         'url': url,
-        'ErrorCode': None
+        'ErrorCode': None,
+        'EvacuationPoint': points[possibleList[0][0]]['name']
     }
 
     return returnData
