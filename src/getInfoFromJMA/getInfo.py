@@ -15,8 +15,7 @@ from funcs import send_msg_with_line, db_connect
 
 def getInfo():
     print('CALLED \'src/getInfoFromJMA/getInfo.py\'')
-    isTest = True # add hakodate city and warningCode=20
-    isTestData = False # if true, update every time
+    isTest = False # add hakodate city and warningCode=20
 
     # this function dose ...
     # ~ get information from JAM server
@@ -33,97 +32,87 @@ def getInfo():
             'Earthquake': ''
         }
 
-    ### pp.pprint(lastInfo)
-
-    # THIS CODE IS JUST FOR TEST !!!
-    if isTestData:
-        lastInfo = {
-            'Warning': '',
-            'Earthquake': ''
-        }
-
     # weather Warning
-    url_w = "https://www.data.jma.go.jp/developer/xml/feed/extra.xml"
-    res_w = requests.get(url_w)
-    res_w.encoding = res_w.apparent_encoding
-    Bs4_w = bs(res_w.text, 'lxml-xml')
-    entries_w = Bs4_w.select('entry')
-    infoSetW = [
-        {
-            'type': 'Warning',
-            'title': i.select_one('title').text,
-            'url': i.select_one('id').text,
-            'author': i.select_one('author > name').text,
-            'time': i.select_one('updated').text,
-        }
-        for i in entries_w
-    ]
+    if not isTest:
+        url_w = "https://www.data.jma.go.jp/developer/xml/feed/extra.xml"
+        res_w = requests.get(url_w)
+        res_w.encoding = res_w.apparent_encoding
+        Bs4_w = bs(res_w.text, 'lxml-xml')
+        entries_w = Bs4_w.select('entry')
+        infoSetW = [
+            {
+                'type': 'Warning',
+                'title': i.select_one('title').text,
+                'url': i.select_one('id').text,
+                'author': i.select_one('author > name').text,
+                'time': i.select_one('updated').text,
+            }
+            for i in entries_w
+        ]
 
-    # Earthquake and Volcanic
-    url_e = "https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml"
-    res_e = requests.get(url_e)
-    res_e.encoding = res_e.apparent_encoding
-    Bs4_e = bs(res_e.text, 'lxml-xml')
-    entries_e = Bs4_e.select('entry')
-    infoSetE = [
-        {
-            'type': 'Earthquake',
-            'title': i.select_one('title').text,
-            'url': i.select_one('id').text,
-            'author': i.select_one('author > name').text,
-            'time': i.select_one('updated').text,
-        }
-        for i in entries_e
-    ]
+        # Earthquake and Volcanic
+        url_e = "https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml"
+        res_e = requests.get(url_e)
+        res_e.encoding = res_e.apparent_encoding
+        Bs4_e = bs(res_e.text, 'lxml-xml')
+        entries_e = Bs4_e.select('entry')
+        infoSetE = [
+            {
+                'type': 'Earthquake',
+                'title': i.select_one('title').text,
+                'url': i.select_one('id').text,
+                'author': i.select_one('author > name').text,
+                'time': i.select_one('updated').text,
+            }
+            for i in entries_e
+        ]
 
-    noUpdate = True
-    infoSet = []
-    # only weather warning, just for now
-    for info in infoSetW:
-        if info['url'] == lastInfo['Warning']:
-            break
-        else:
-            noUpdate = False
-            if info['title'] in ['気象特別警報・警報・注意報', '土砂災害警戒情報']:
-                infoSet.append(info)
-    # no process (earthquake)
-    for info in infoSetE:
-        if info['url'] == lastInfo['Earthquake']:
-            break
-        else:
-            noUpdate = False
-            if info['title'] in ['震源・震度に関する情報', '噴火警報・予報']:
-                infoSet.append(info)
+        noUpdate = True
+        infoSet = []
+        # only weather warning, just for now
+        for info in infoSetW:
+            if info['url'] == lastInfo['Warning']:
+                break
+            else:
+                noUpdate = False
+                if info['title'] in ['気象特別警報・警報・注意報', '土砂災害警戒情報']:
+                    infoSet.append(info)
+        # no process (earthquake)
+        for info in infoSetE:
+            if info['url'] == lastInfo['Earthquake']:
+                break
+            else:
+                noUpdate = False
+                if info['title'] in ['震源・震度に関する情報', '噴火警報・予報']:
+                    infoSet.append(info)
 
-    if noUpdate:
-        print('No Update!')
-        if isTest:
-            print('Test data will be added, this program won\'t end here.')
-        else:
+        if noUpdate:
+            print('No Update!')
             return 0
 
-    entries = [
-        Entry(
-            type = i['type'],
-            title = i['title'],
-            author = i['author'],
-            time = i['time'],
-            url = i['url'],
-        ) for i in infoSet
-    ]
+        entries = [
+            Entry(
+                type = i['type'],
+                title = i['title'],
+                author = i['author'],
+                time = i['time'],
+                url = i['url'],
+            ) for i in infoSet
+        ]
 
-    notificationTagets = []
-    data = []
-    for entry in entries:
-        entry.details()
-        data += entry.data
+        notificationTagets = []
+        data = []
+        for entry in entries:
+            entry.details()
+            data += entry.data
 
-    if isTest:
+    else:
         data.append({
             'cityCode': '0120200',
             'warningCode': '03',
         })
 
+    pp.pprint(data)
     # connect to database
     conn = db_connect()
     cursor = conn.cursor()
@@ -143,6 +132,8 @@ def getInfo():
     cursor.close()
     conn.close()
 
+    pp.pprint(userUrlAllWarning)
+
     # send "get information" url to each users
     for user_url in userUrlAllWarning:
         send_msg_with_line(
@@ -152,17 +143,17 @@ def getInfo():
             #     ^~~~~~~~~~~~~~
         )
 
-    ### pp.pprint(data)
-    with open('src/getInfoFromJMA/data/disasterList.json', 'w') as f:
-        json.dump(data, f, ensure_ascii=True, indent=4, sort_keys=True, separators=(',', ': '))
+    if not isTest:
+        with open('src/getInfoFromJMA/data/disasterList.json', 'w') as f:
+            json.dump(data, f, ensure_ascii=True, indent=4, sort_keys=True, separators=(',', ': '))
 
-    # record the last information
-    lastInfoOut = {
-        'Warning': infoSetW[0]['url'],
-        'Earthquake': infoSetE[0]['url']
-    }
-    with open('src/getInfoFromJMA/data/lastInfo.json', 'w', encoding='UTF-8') as f:
-        json.dump(lastInfoOut, f, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
+        # record the last information
+        lastInfoOut = {
+            'Warning': infoSetW[0]['url'],
+            'Earthquake': infoSetE[0]['url']
+        }
+        with open('src/getInfoFromJMA/data/lastInfo.json', 'w', encoding='UTF-8') as f:
+            json.dump(lastInfoOut, f, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
 
 
 class Entry:

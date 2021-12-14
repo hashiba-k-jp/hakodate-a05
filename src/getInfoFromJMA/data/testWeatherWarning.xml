@@ -1,0 +1,38 @@
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx_add="http://xml.kishou.go.jp/jmaxml1/addition1/">
+  <Control>
+    <Title>気象特別警報・警報・注意報</Title>
+    <DateTime>2021-12-13T11:02:34Z</DateTime>
+    <Status>通常</Status>
+    <EditorialOffice>函館地方気象台</EditorialOffice>
+    <PublishingOffice>函館地方気象台</PublishingOffice>
+  </Control>
+  <Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+    <Title>渡島・檜山地方気象警報・注意報</Title>
+    <ReportDateTime>2021-12-13T20:02:00+09:00</ReportDateTime>
+    <TargetDateTime>2021-12-13T20:02:00+09:00</TargetDateTime>
+    <EventID/>
+    <InfoType>発表</InfoType>
+    <Serial/>
+    <InfoKind>気象警報・注意報</InfoKind>
+    <InfoKindVersion>1.1_2</InfoKindVersion>
+    <Headline>
+      <Text>渡島、檜山地方では、１４日昼前まで強風に、１４日夕方まで高波に注意してください。</Text>
+      <Information type="気象警報・注意報（市町村等）">
+        <Item>
+          <Kind>
+            <Name>大雨警報</Name>
+            <Code>03</Code>
+          </Kind>
+          <Areas codeType="気象・地震・火山情報／市町村等">
+            <Area>
+              <Name>函館市</Name>
+              <Code>0120200</Code>
+            </Area>
+          </Areas>
+        </Item>
+      </Information>
+    </Headline>
+  </Head>
+  <Body>
+  </Body>
+</Report>

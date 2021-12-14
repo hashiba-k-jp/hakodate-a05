@@ -49,10 +49,10 @@ function success(pos){
         // 送信成功
         console.log('good!')
         var result = request.responseText;
-        console.log(result)
+        // console.log(result)
         document.getElementById('sendButton').textContent = '送信完了';
         document.getElementById('sendButton').disabled = true;
-        document.getElementById('afterSend').innerHTML = 'このタブは閉じてください。<br>LINE通知が届きます。';
+        document.getElementById('afterSend').innerHTML = '最寄りの避難所は<b>' + result + '</b>です。<br>LINEで経路地図が送信されます。';
         document.getElementById('afterSend').classList.add = 'py-1';
       }
   };
