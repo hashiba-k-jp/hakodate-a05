@@ -7,9 +7,11 @@ import requests
 from bs4 import BeautifulSoup as bs
 import pprint as pp
 import json
-import sys
+import sys,os
 sys.path.append('.')
 from funcs import send_msg_with_line, db_connect
+
+
 
 def getInfo():
     print('CALLED \'src/getInfoFromJMA/getInfo.py\'')
@@ -146,7 +148,7 @@ def getInfo():
         send_msg_with_line(
             user_id=user_url['userid'],
             # -=-=-=-=-=- MUST BE CHANGED WHEN RUN THIS PROGRAM -=-=-=-=-=-
-            msgs="localhost:5001/location?userID={}&warningCode={}".format(user_url['userid'], user_url['warningCode'])
+            msgs="https://{}/location?userID={}&warningCode={}".format(os.environ.get('ROOT_URL'),user_url['userid'], user_url['warningCode'])
             #     ^~~~~~~~~~~~~~
         )
 

@@ -229,7 +229,7 @@ def webhock():
                     #ユーザにURLと認証コードを送信
 
                     #URLを送信
-                    url_msg = '管理用コンソール用URL\n{root_url}/{uuid}'.format(
+                    url_msg = '管理用コンソール用URL\nhttps://{root_url}/{uuid}'.format(
                         root_url=CONSOLE_ROOT_URL,
                         uuid=user_uuid
                     )
