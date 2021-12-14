@@ -127,7 +127,7 @@ def getInfo():
                 print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             user_ids = cursor.fetchall()
-            print('user_ids:{}'.format(user_ids))
+            pp.pprint(user_ids)
             conn.commit()
             userUrl = [{'userid':userid, 'warningCode':d['warningCode']} for userid in user_ids]
             userUrlAllWarning += userUrl
