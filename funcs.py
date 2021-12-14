@@ -8,6 +8,8 @@ from linebot import(
 )
 import linebot
 
+ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
+
 #LINEユーザにメッセージを送信する関数
 def send_msg_with_line(user_id,msgs):
     send_msg = TextSendMessage(text='')
@@ -31,12 +33,8 @@ def send_msg_with_line(user_id,msgs):
 def db_connect():
     #環境変数からデータベースの情報を取得
     DATABASE_URL = os.environ.get('DATABASE_URL')
-    print(DATABASE_URL)
 
-    #接続先文字列の生成
-    connection_info = DATABASE_URL
-
-    print('Connecting:{info}'.format(info=connection_info))
+    print('Connecting:{info}'.format(info=DATABASE_URL))
     conn = ''
     try:
         conn = psycopg2.connect(connection_info)
