@@ -121,13 +121,14 @@ def getInfo():
         userUrlAllWarning = []
         for d in data:
             # 与えられたcityCode(d['cityCode'])を持つユーザ(user_id)を全て抽出する
-            sql = "SELECT user_id FROM public.user WHERE id = ( SELECT user_id FROM public.resistration WHERE area_id = {});".format(d['cityCode'])
-            # sql = "SELECT user_id FROM public.resistration WHERE area_id = {};".format(d['cityCode'])
+            # sql = "SELECT user_id FROM public.user WHERE id = ( SELECT user_id FROM public.resistration WHERE area_id = {});".format(d['cityCode'])
+            sql = "SELECT user_id FROM public.resistration WHERE area_id = {};".format(d['cityCode'])
             # sql = "SELECT * FROM public.resistration"
             if isTest:
                 print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             user_ids = cursor.fetchall()
+            user_ids = [i[0] for i in user_ids]
             pp.pprint(user_ids)
             conn.commit()
             userUrl = [{'userid':userid, 'warningCode':d['warningCode']} for userid in user_ids]
