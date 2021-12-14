@@ -19,12 +19,13 @@ from linebot import(
 )
 import linebot
 
+from funcs import *
+
 app = Flask(__name__)
 
 #各種定数を定義
 DEBUG = os.environ.get('IS_DEBUG') == 'True' #デバッグ用のフラグ
 CHANNEL_SECRET  = os.environ.get('CHANNEL_SECRET')
-ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
 ROOT_URL = os.environ.get('ROOT_URL')
 CONSOLE_ROOT_URL = '{ROOT_URL}/control'.format(
     ROOT_URL=ROOT_URL
@@ -315,25 +316,6 @@ def get_location_post():
 
         return "completed!"
 
-#LINEユーザにメッセージを送信する関数
-def send_msg_with_line(user_id,msgs):
-    send_msg = TextSendMessage(text='')
-    try:
-        line_bot_api = LineBotApi(ACCESS_TOKEN)
-
-        for msg in msgs:
-            if DEBUG == True:
-                print('SENDING MESSAGE:{}'.format(msg))
-            send_msg = TextSendMessage(text=msg)
-            line_bot_api.push_message(user_id,send_msg)
-    except linebot.exceptions.LineBotApiError as e:
-        print(e.error.message)
-        print(e.error.details)
-
-    for msg in msgs:
-        if DEBUG == True:
-            print('SENNDING MESSAGE:{}'.format(msg))
-
 #署名検証用の関数
 def validation(body,signature):
     hash = hmac.new(CHANNEL_SECRET.encode('utf-8'),
@@ -348,24 +330,6 @@ def validation(body,signature):
         return True
     else:
         return False
-
-#DB接続用の関数
-def db_connect():
-    #環境変数からデータベースの情報を取得
-    DATABASE_URL = os.environ.get('DATABASE_URL')
-
-    #接続先文字列の生成
-    connection_info = DATABASE_URL
-
-    print('Connecting:{info}'.format(info=connection_info))
-    conn = ''
-    try:
-        conn = psycopg2.connect(connection_info)
-    except psycopg2.Error: 
-        print('Database connection failed!!') #DBとの接続に失敗した場合は終了する
-        sys.exit()
-
-    return conn
 
 if __name__ == "__main__":
     initApp()
