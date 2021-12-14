@@ -37,7 +37,7 @@ def db_connect():
     print('Connecting:{info}'.format(info=DATABASE_URL))
     conn = ''
     try:
-        conn = psycopg2.connect(connection_info)
+        conn = psycopg2.connect(DATABASE_RUL)
     except psycopg2.Error:
         print('Database connection failed!!') #DBとの接続に失敗した場合は終了する
         sys.exit()
