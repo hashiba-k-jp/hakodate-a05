@@ -10,7 +10,7 @@ import json
 import sys,os
 sys.path.append('.')
 from funcs import send_msg_with_line, db_connect
-
+import psycopg2
 
 
 def getInfo():
@@ -114,23 +114,28 @@ def getInfo():
 
     pp.pprint(data)
     # connect to database
-    conn = db_connect()
-    cursor = conn.cursor()
-    userUrlAllWarning = []
-    for d in data:
-        # 与えられたcityCode(d['cityCode'])を持つユーザ(user_id)を全て抽出する
-        sql = "SELECT user_id FROM public.user WHERE id = ( SELECT user_id FROM public.resistration WHERE area_id = {});".format(d['cityCode'])
-        if isTest:
-            print('SQL EXECUTE:{}'.format(sql))
-        cursor.execute(sql)
-        user_ids = cursor.fetchall()
-        conn.commit()
-        userUrl = [{'userid':userid, 'warningCode':d['warningCode']} for userid in user_ids]
-        userUrlAllWarning += userUrl
+    try:
+        conn = db_connect()
+        cursor = conn.cursor()
+        userUrlAllWarning = []
+        for d in data:
+            # 与えられたcityCode(d['cityCode'])を持つユーザ(user_id)を全て抽出する
+            sql = "SELECT user_id FROM public.user WHERE id = ( SELECT user_id FROM public.resistration WHERE area_id = {});".format(d['cityCode'])
+            if isTest:
+                print('SQL EXECUTE:{}'.format(sql))
+            cursor.execute(sql)
+            user_ids = cursor.fetchall()
+            print('user_ids:{}'.format(user_ids))
+            conn.commit()
+            userUrl = [{'userid':userid, 'warningCode':d['warningCode']} for userid in user_ids]
+            userUrlAllWarning += userUrl
 
-    # disconnect to database
-    cursor.close()
-    conn.close()
+        # disconnect to database
+        cursor.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(e.pgerror)
+        print(e.diag.message_primary)
 
     pp.pprint(userUrlAllWarning)
 
