@@ -12,7 +12,9 @@ import numpy as np
 import pprint as pp
 import sys,os
 
-def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isTest=False, GPS=None, userID=None):
+def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', GPS=None, userID=None):
+
+    print('CALLED find_evacuation_point!')
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     # [1] get API key
@@ -20,44 +22,20 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
         from src.findNearestEvacuation.data.APIKEY import APIKEY
 
     except ModuleNotFoundError:
-        ### print('ModuleNotFoundError')
-        ### print('The APIKEY.py does NOT exist on same directry.')
         returnData = {
             'ErrorCode': 'Google API KEY not found',
         }
-
         return returnData
-        ### return 'failed : API KEY dose not exist!'
-        ### exit()
-
-    # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    # [2.A] get latitude(N) and longitude(E) of current address
-    # -> Everyone can NOT run this program without this API key.
-    if isTest:
-        url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + currentAddress + '&key=' + KEY
-        response = requests.get(url)
-        response.encoding = response.apparent_encoding
-        if response.status_code != 200:
-            print('ERROR : Requests process has NOT successfully finishied at process [2.A] (get current location)')
-            print('URL : {}'.format(url))
-            exit()
-        data = response.json()
-        ### pp.pprint(data)
-        N = data['results'][0]['geometry']['location']['lat']
-        E = data['results'][0]['geometry']['location']['lng']
-        # N <class 'float'> := latitude of current location (North)
-        # E <class 'float'> := longitude of current location (East)
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    # [2.B] get latitude(N) and longitude(E) of current address FROM JavaScript
+    # [2] get latitude(N) and longitude(E) of current address FROM JavaScript
+    if GPS is None:
+        print('ERROR : GPS is None')
+        exit()
     else:
-        if GPS is None:
-            print('ERROR : GPS is None')
-            exit()
-        else:
-            N = float(GPS['N'])
-            E = float(GPS['E'])
+        N = float(GPS['N'])
+        E = float(GPS['E'])
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -105,7 +83,6 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
     else:
         possibleList = [x for x in distlist if x[1] < ELD]
     # possibleList <class 'list'> := some evacuation points which satisfy [4]
-    ### pp.pprint(possibleList)
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -142,10 +119,3 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
     }
 
     return returnData
-
-
-# This is for the TEST run
-if __name__ == '__main__':
-    CA = 'JR函館駅'
-    HT = '03'
-    find_evacuation_point(currentAddress=CA, hazardType=HT)

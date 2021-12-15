@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-from src.findNearestEvacuation.test import test_app
 from src.findNearestEvacuation.find_evacuation_point import find_evacuation_point
 # from src.getInfoFromJMA.getInfo import getInfo, Entry
 from src.getInfoFromJMA.initData import initData
@@ -265,12 +264,9 @@ def get_location_post():
     # hazardType = <warningCode>
     # GPS = {'N':<lat>, 'E':<lng>}
     # userID = <userID>
-    # isTest = False
-    test_app()
     notiData = find_evacuation_point(
         currentAddress=None,
         hazardType=warningCode,
-        isTest=False,
         GPS={
             'N': lat,
             'E': lng
