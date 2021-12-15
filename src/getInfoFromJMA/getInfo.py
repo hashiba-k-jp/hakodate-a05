@@ -15,7 +15,7 @@ import psycopg2
 
 def getInfo():
     print('CALLED \'src/getInfoFromJMA/getInfo.py\'')
-    isTest = True # add hakodate city and warningCode=20
+    isTest = False # add hakodate city and warningCode=20
 
     # this function dose ...
     # ~ get information from JAM server
