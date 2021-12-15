@@ -131,14 +131,14 @@ def getInfo():
 
             all_user_ids = []
 
-                for user_id in user_ids:
-                    sql = "SELECT user_id FROM public.user WHERE id = {};".format(user_id)
-                    if isTest:
-                        print('SQL EXECUTE:{}'.format(sql))
-                    cursor.execute(sql)
-                    user_ids = cursor.fetchall()
-                    user_ids = [i[0] for i in user_ids]
-                    all_user_ids += user_ids
+            for user_id in user_ids:
+                sql = "SELECT user_id FROM public.user WHERE id = {};".format(user_id)
+                if isTest:
+                    print('SQL EXECUTE:{}'.format(sql))
+                cursor.execute(sql)
+                user_ids = cursor.fetchall()
+                user_ids = [i[0] for i in user_ids]
+                all_user_ids += user_ids
 
             pp.pprint(all_user_ids)
 
