@@ -130,15 +130,10 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', isT
         point.append(distMeter)
         point.append(distTime)
 
-    ### print('current address is {}'.format(currentAddress))
-    ### print('tareget hazard is {}'.format(hazardTypeName[hazardType]))
-    ### print('id, name, Euclidean_Dist(km), distance(m), walking time(sec)')
     possibleList.sort(key = lambda x: x[4])
-    ### pp.pprint(possibleList)
 
     url = 'https://www.google.com/maps/dir/' + str(N) + ',+' + str(E) +\
           '/' + points[possibleList[0][0]]['geopoint']['North'] + ',+' + points[possibleList[0][0]]['geopoint']['East'] + '/'
-    ### print('-='*25)
     returnData = {
         'userID': userID,
         'url': url,
