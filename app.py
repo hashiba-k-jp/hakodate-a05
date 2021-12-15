@@ -283,7 +283,7 @@ def get_location_post():
     else:
         send_msg_with_line(
             user_id=notiData['userID'],
-            msgs=notiData['url'],
+            msgs=[notiData['url']],
         )
         return notiData['EvacuationPoint']
 
