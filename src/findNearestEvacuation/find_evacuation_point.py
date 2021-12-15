@@ -39,8 +39,7 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', GPS
 
 
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    # [3] load all evacuation points of Hokkaido from .json data
-    # THIS FILE IS NOT ON THE GitHUb BECAUSE OF LICENSE PROBLEMS.
+    # [3] load all evacuation points of All from .json data
     try:
         with open('src/findNearestEvacuation/data/mergeFromCity.json', 'r') as f:
             points = json.load(f)
@@ -65,7 +64,7 @@ def find_evacuation_point(currentAddress="五稜郭公園", hazardType='03', GPS
         '60': 'volcanicHazard',
         '70': 'landslideDisaster',
 
-        '20': 'windAndFloodDamage',
+        # '20': 'windAndFloodDamage',
     }
     for key, value in zip(points.keys(), points.values()):
         if (value['hazardTypes'][hazardTypeName[hazardType]]):

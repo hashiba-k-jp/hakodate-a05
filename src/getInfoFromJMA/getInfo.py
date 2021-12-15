@@ -122,13 +122,10 @@ def getInfo():
         for d in data:
             # 与えられたcityCode(d['cityCode'])を持つユーザ(user_id)を全て抽出する
             # sql = "SELECT user_id FROM public.user WHERE id = ( SELECT user_id FROM public.resistration WHERE area_id = {});".format(d['cityCode'])
-            sql = "SELECT user_id FROM public.resistration WHERE area_id = {};".format(d['cityCode'])
-            sql = "SELECT * FROM public.user"
             if isTest:
                 print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             user_ids = cursor.fetchall()
-            pp.pprint(user_ids)
             user_ids = [i[0] for i in user_ids]
             pp.pprint(user_ids)
             conn.commit()
@@ -178,7 +175,7 @@ class Entry:
         # USE  04 洪水警報
         # USE  05 暴風警報
         # USE  08 高潮警報
-        # TEST 20 濃霧注意報
+        # TEST 20 濃霧注意報 -> No USE in the TEST
         # USE  33 大雨特別警報
         # USE  35 暴風特別警報
         # USE  38 高潮特別警報
@@ -206,7 +203,7 @@ class Entry:
                 self.wCodes = [i.select_one('Kind > Code').text for i in items]
                 self.cCodes = [i.select_one('Area > Code').text for i in items]
                 for wCode, cCode in zip(self.wCodes, self.cCodes):
-                    if wCode in ['03', '04', '05', '08', '20', '33', '35', '38']:
+                    if wCode in ['03', '04', '05', '08', '33', '35', '38']:
                         self.data.append({
                             'cityCode': cCode,
                             'warningCode': wCode
