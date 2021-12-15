@@ -1,6 +1,7 @@
 # time scheduler
 
 def initApp():
+    print('CALLED \'initApp\'!')
     from src.getInfoFromJMA.getInfo import getInfo, Entry
     from apscheduler.schedulers.background import BackgroundScheduler
 

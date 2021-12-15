@@ -1,10 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from src.findNearestEvacuation.find_evacuation_point import find_evacuation_point
-# from src.getInfoFromJMA.getInfo import getInfo, Entry
 from src.getInfoFromJMA.initData import initData
 import pprint as pp
-
-# get data from JMA and run the program each same time.
 from initApp import initApp
 
 import base64,hashlib,hmac #署名検証用
@@ -295,7 +292,7 @@ def validation(body,signature):
         return False
 
 if __name__ == "__main__":
-    initApp()
-    initData()
+    # initApp()
+    # initData()
     app.run(debug=True, host='localhost', port=5001)
 

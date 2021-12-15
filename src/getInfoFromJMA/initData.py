@@ -4,7 +4,7 @@ import pprint as pp
 import json
 
 def initData():
-    print('CALLED \'src/getInfoFromJMA/init.py\'')
+    print('CALLED \'src/getInfoFromJMA/initData.py\'')
     url = "https://www.data.jma.go.jp/developer/xml/feed/extra.xml"
     res = requests.get(url)
     res.encoding = res.apparent_encoding
