@@ -122,14 +122,28 @@ def getInfo():
         for d in data:
             # 与えられたcityCode(d['cityCode'])を持つユーザ(user_id)を全て抽出する
             # sql = "SELECT user_id FROM public.user WHERE id = ( SELECT user_id FROM public.resistration WHERE area_id = {});".format(d['cityCode'])
+            sql = "SELECT user_id FROM public.resistration WHERE area_id = {};".format(d['cityCode'])
             if isTest:
                 print('SQL EXECUTE:{}'.format(sql))
             cursor.execute(sql)
             user_ids = cursor.fetchall()
             user_ids = [i[0] for i in user_ids]
-            pp.pprint(user_ids)
+
+            all_user_ids = []
+
+                for user_id in user_ids:
+                    sql = "SELECT user_id FROM public.user WHERE id = {};".format(user_id)
+                    if isTest:
+                        print('SQL EXECUTE:{}'.format(sql))
+                    cursor.execute(sql)
+                    user_ids = cursor.fetchall()
+                    user_ids = [i[0] for i in user_ids]
+                    all_user_ids += user_ids
+
+            pp.pprint(all_user_ids)
+
             conn.commit()
-            userUrl = [{'userid':userid, 'warningCode':d['warningCode']} for userid in user_ids]
+            userUrl = [{'userid':userid, 'warningCode':d['warningCode']} for userid in all_user_ids]
             userUrlAllWarning += userUrl
 
         # disconnect to database
@@ -145,9 +159,7 @@ def getInfo():
     for user_url in userUrlAllWarning:
         send_msg_with_line(
             user_id=user_url['userid'],
-            # -=-=-=-=-=- MUST BE CHANGED WHEN RUN THIS PROGRAM -=-=-=-=-=-
-            msgs="https://{}/location?userID={}&warningCode={}".format(os.environ.get('ROOT_URL'),user_url['userid'], user_url['warningCode'])
-            #     ^~~~~~~~~~~~~~
+            msgs=["https://{}/location?userID={}&warningCode={}".format(os.environ.get('ROOT_URL'),user_url['userid'], user_url['warningCode'])]
         )
 
     if not isTest:
