@@ -27,6 +27,10 @@ CONSOLE_ROOT_URL = '{ROOT_URL}/control'.format(
     ROOT_URL=ROOT_URL
 )
 
+initApp()
+initData()
+
+
 @app.route('/control/<uuid:id>')
 def control_console(id):
     #DBへのコネクションを作成
@@ -257,10 +261,6 @@ def get_location_post():
     userID = request.form['userID']
     warningCode = request.form['warningCode']
     print(lat, lng, userID, warningCode)
-    # currentAddress = None
-    # hazardType = <warningCode>
-    # GPS = {'N':<lat>, 'E':<lng>}
-    # userID = <userID>
     notiData = find_evacuation_point(
         currentAddress=None,
         hazardType=warningCode,
@@ -292,7 +292,5 @@ def validation(body,signature):
         return False
 
 if __name__ == "__main__":
-    initApp()
-    initData()
     app.run(debug=True, host='localhost', port=5001)
 
