@@ -110,7 +110,7 @@ def getInfo():
         data = []
         data.append({
             'cityCode': '0120200',
-            'warningCode': '03',
+            'warningCode': '70',
         })
 
     pp.pprint(data)
