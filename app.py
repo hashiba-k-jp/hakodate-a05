@@ -112,7 +112,7 @@ def control_form():
                     'resistration_result.html',
                     title='避難所経路探索|登録結果',
                     result='登録完了',
-                    resulttext='登録が完了しました。このページを閉じてください。'
+                    result_text='登録が完了しました。このページを閉じてください。'
                 )
         else:
             #DBからユーザの情報を削除
