@@ -1,6 +1,6 @@
 <html lang="ja">
 
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>{{ title }}</title>
 
@@ -10,42 +10,57 @@
     <!--bootstrapとのリンク-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="static/css/my-sheet.css">
+  </head>
 
-<body>
-    <div class="container">
-        <div class="row">
-            <p class="fs-1">避難所経路探索</p>
-        </div>
-        <div class="row">
-            <p class="text-start">現在の対応地域は下記のみです。登録する場合は同意にチェックをし認証コードを入力して、送信してください。また、登録を希望しない場合はチェックを付けずに送信してください。データベースからご利用者様の情報をすべて削除いたします。</p>
-        </div>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-11">
-                <ol>
-                    <li>函館市</li>
-                </ol>
-            </div>
-        </div>
-        <form action="/control/form" method="post">
-            <input type="hidden" name="user_uuid" id="user_uuid" value={{ id }}>
-            <div class="mb-3 formcheck">
-                <label for="user_resistration_accept_checkbox" class="form-check-label">登録する</label>
-                <input type="checkbox" class="form-check-input" name="user_resistration_accept_checkbox" value="1">
-            </div>
-            <br>
-            <div class="row">
-            	<div class="col-auto">
-            		<button class="btn btn-light submit_button" id="submit_button">送信する</button>
-            	</div>
-            </div>
-        </form>
+  <body>
+    <div class="title container">
+      <div class="title-left">
+        <h6 class="display-6 fw-bold py-5">
+          避難所経路探索<br>
+          <small class="text-muted">登録</small>
+        </h6>
+      </div>
     </div>
-
+    <div class="container py-1">
+      <p>現在の対応地域は下記のみです。登録する場合は<b class="fw-bold">同意にチェックをして</b>送信してください。<br>
+        また、登録を希望しない場合はチェックを付けずに送信してください。データベースからご利用者様の情報をすべて削除いたします。</p>
+    </div>
+    <div class="container py-1">
+      <div class="row">
+          <p class="text-start">現在の対応地域は下記のみです。登録する場合は同意にチェックをし認証コードを入力して、送信してください。また、登録を希望しない場合はチェックを付けずに送信してください。データベースからご利用者様の情報をすべて削除いたします。</p>
+      </div>
+      <div class="row">
+          <div class="col-1"></div>
+          <div class="col-11">
+              <ol>
+                  <li>函館市</li>
+              </ol>
+          </div>
+      </div>
+    </div>
+    <div class="container py-1">
+      <form action="/control/form" method="post">
+          <input type="hidden" name="user_uuid" id="user_uuid" value={{ id }}>
+          <div class="mb-3 formcheck">
+              <label for="user_resistration_accept_checkbox" class="form-check-label">登録する</label>
+              <input type="checkbox" class="form-check-input" name="user_resistration_accept_checkbox" value="1">
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-auto">
+              <button class="btn btn-light submit_button" id="submit_button">送信する</button>
+            </div>
+          </div>
+      </form>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
-</body>
-
+  </body>
+  <footer class="footer mt-auto py-3 bg-light fixed-bottom">
+    <div class="container">
+      <span class="text-muted">Copyright 2021 hakodate-a05</span>
+    </div>
+  </footer>
 </html>
