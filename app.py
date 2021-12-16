@@ -289,7 +289,7 @@ def validation(body,signature):
         return False
 
 if __name__ == "__main__":
-    initApp()
-    initData()
+    # initApp()
+    # initData()
     app.run(debug=True, host='localhost', port=5001)
 
