@@ -263,7 +263,7 @@ def get_location_get():
     }
     try:
         req = request.args
-        warningCode = req.get("user_id")
+        warningCode = req.get("warningCode")
         warningName = name_type[warningCode]
     except:
         warningName = "その他の災害"
