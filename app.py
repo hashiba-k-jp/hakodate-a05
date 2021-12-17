@@ -249,7 +249,29 @@ def webhock():
 
 @app.route('/location', methods=['GET'])
 def get_location_get():
-    return render_template('gps_design.html', title='Get Location App')
+    name_type = {
+        '03': "洪水",
+        '04': "洪水",
+        '05': "洪水",
+        '33': "洪水",
+        '35': "洪水",
+        '20': "濃霧注意報（テスト用）",
+        '50': "地震",
+        '08': "高潮",
+        '38': "高潮",
+        '70': "崖崩れ、土石流及び地滑り",
+    }
+    try:
+        req = request.args
+        warningCode = req.get("user_id")
+        warningName = name_type[warningCode]
+    except:
+        warningName = "その他の災害"
+    return render_template(
+        'gps_design.html',
+        title='Get Location App',
+        warningName=warningName
+    )
 
 @app.route('/location', methods=['POST'])
 def get_location_post():
